@@ -6,10 +6,6 @@ import java.util.List;
 
 public interface UserInt {
     public List<User> allUsers();
-    //signup -> check if user exists, if not create new user then send user id (create new)
-//    public User newUser(String username, String password);
-//    //login -> find user and return users id, income, and expenses data (find one)
-//    public User login(String username, String password);
 
     public void addUser(String username, String password);
 
@@ -19,7 +15,9 @@ public interface UserInt {
     //check if user exists, then return their data
     public User login(String username, String password);
 
+    public void deleteUser(long id);
+
+
     //extra!!
     //update user
-    //delete user
 }

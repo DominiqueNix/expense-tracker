@@ -179,4 +179,15 @@ public class UserImp implements UserInt {
         System.out.println(user);
         return user;
     }
+
+    @Override
+    public void deleteUser(long id){
+        Connection con = DBConnection.connect();
+        try{
+            Statement stmt = con.createStatement();
+            stmt.executeUpdate("delete from users where id="+id);
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
 }

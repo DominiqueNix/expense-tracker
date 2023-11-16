@@ -5,10 +5,7 @@ import com.expenses.expenses.interfaces.UserInt;
 import com.expenses.expenses.models.User;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,7 +20,7 @@ public class UserController {
         return user.allUsers();
     }
 
-    @PostMapping("/newUsers")
+    @PostMapping("/adduser")
     @ResponseBody
     public void addNew(@RequestBody User newUser){
         user.addUser(newUser.getUsername(), newUser.getPassword());
@@ -38,5 +35,10 @@ public class UserController {
     @ResponseBody
     public User login(@RequestBody User existingUser){
         return user.login(existingUser.getUsername(), existingUser.getPassword());
+    }
+
+    @DeleteMapping("/users/delete/{id}")
+    public void deleteUser(@PathVariable(value="id") long id){
+            user.deleteUser(id);
     }
 }
