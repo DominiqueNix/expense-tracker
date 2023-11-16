@@ -12,7 +12,7 @@ public interface ExpensesInt {
     //add expense to a user void
     public void addExpense(Expenses exp);
     //update expense void
-    public void updateExpense(long id);
+    public void updateExpense(Expenses exp);
     //delete expense void
     public void deleteExpense(long id);
 }
