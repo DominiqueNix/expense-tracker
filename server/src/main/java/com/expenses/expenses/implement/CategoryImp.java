@@ -5,7 +5,6 @@ import com.expenses.expenses.interfaces.CategoryInt;
 import com.expenses.expenses.models.Categories;
 
 import java.sql.*;
-import java.util.ArrayList;
 
 public class CategoryImp implements CategoryInt {
 

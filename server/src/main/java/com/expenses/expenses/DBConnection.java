@@ -1,17 +1,12 @@
 package com.expenses.expenses;
 
-import com.expenses.expenses.implement.ExpensesImp;
-import com.expenses.expenses.implement.UserImp;
-import com.expenses.expenses.interfaces.ExpensesInt;
-import com.expenses.expenses.interfaces.UserInt;
-
 import java.sql.*;
 
 public class DBConnection {
     public static Connection connect(){
         Connection con = null;
         try{
-            con = DriverManager.getConnection("jdbc:sqlite:expenses");
+            con = DriverManager.getConnection("jdbc:sqlite:server/expenses");
 
             Statement stmt = con.createStatement();
             stmt.setQueryTimeout(30);
