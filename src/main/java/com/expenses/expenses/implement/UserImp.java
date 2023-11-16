@@ -180,6 +180,48 @@ public class UserImp implements UserInt {
         return user;
     }
 
+    public User findOneUser(long id){
+        Connection con = DBConnection.connect();
+        User user = new User();
+        ArrayList<Income> incomes= new ArrayList<>();
+        ArrayList<Expenses> expenses= new ArrayList<>();
+        try{
+            Statement stmt = con.createStatement();
+
+            ResultSet rs = stmt.executeQuery("select id, username from users where id="+id);
+            user.setId(rs.getInt("id"));
+            user.setUsername(rs.getString("username"));
+            ResultSet rs2 = stmt.executeQuery("select * from income where userId =" + id);
+
+            while(rs2.next()){
+                Income income = new Income();
+                income.setId(rs2.getLong("id"));
+                income.setName(rs2.getString("name"));
+                income.setPrice(rs2.getDouble("price"));
+                income.setCategoryId(rs2.getLong("categoryId"));
+                income.setUserId(rs2.getLong("userId"));
+                incomes.add(income);
+            }
+            user.setIncome(incomes);
+            ResultSet rs3 = stmt.executeQuery("select * from expenses where userId =" +id);
+
+            while(rs3.next()){
+                Expenses expense = new Expenses();
+                expense.setId(rs3.getLong("id"));
+                expense.setName(rs3.getString("name"));
+                expense.setPrice(rs3.getDouble("price"));
+                expense.setCategoryId(rs3.getLong("categoryId"));
+                expense.setUserId(rs3.getLong("userId"));
+                expenses.add(expense);
+            }
+            user.setExpenses(expenses);
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+
+        return user;
+    }
+
     @Override
     public void deleteUser(long id){
         Connection con = DBConnection.connect();

@@ -1,6 +1,8 @@
 package com.expenses.expenses;
 
+import com.expenses.expenses.implement.ExpensesImp;
 import com.expenses.expenses.implement.UserImp;
+import com.expenses.expenses.interfaces.ExpensesInt;
 import com.expenses.expenses.interfaces.UserInt;
 
 import java.sql.*;
@@ -26,12 +28,13 @@ public class DBConnection {
 //            }
 
 //            stmt.executeUpdate("drop table users");
+//            stmt.executeUpdate("drop table categories");
             stmt.executeUpdate("create table if not exists users(id integer primary key autoincrement, username varchar(255), password varchar(255))");
-
+            stmt.executeUpdate("create table if not exists categories(id integer primary key autoincrement, name varchar(255), userId integer references users(id))");
 //            stmt.executeUpdate("drop table income");
 //            stmt.executeUpdate("drop table expenses");
-            stmt.executeUpdate("create table if not exists income(id integer primary key autoincrement, name varchar(255), price int,date varchar(255), categoryId int, userId int)");
-            stmt.executeUpdate("create table if not exists expenses(id integer primary key autoincrement, name varchar(255), price int,date varchar(255), categoryId int, userId int)");
+            stmt.executeUpdate("create table if not exists income(id integer primary key autoincrement, name varchar(255), price int,date varchar(255), categoryId integer references categories(id), userId integer references users(id))");
+            stmt.executeUpdate("create table if not exists expenses(id integer primary key autoincrement, name varchar(255), price int,date varchar(255), categoryId integer references categories(id), userId integer references users(id))");
 //
 
 
@@ -65,15 +68,18 @@ public class DBConnection {
     }
 //
 //    public static void main(String[] args) throws SQLException {
-//        connect();
+////        connect();
 //       Connection con = connect();
 //
+//        ExpensesInt exp = new ExpensesImp();
 //        UserInt user = new UserImp();
 //        user.addUser("Tom", "iloVecAts5");
 //        user.signUp("Teddy", "test123");
 //
+//
+//
 //        user.allUsers();
-
-
+//
+//
 //    }
 }
