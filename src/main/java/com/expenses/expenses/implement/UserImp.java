@@ -142,23 +142,12 @@ public class UserImp implements UserInt {
                             user.setId(rs2.getInt("id"));
                             user.setUsername(rs2.getString("username"));
                             user.setLoggedIn(true);
-                            ResultSet rs3 = stmt.executeQuery("select * from income where userId =" + rs2.getInt("id"));
-
-                            while(rs3.next()){
-                                Income income = new Income();
-                                income.setId(rs3.getLong("id"));
-                                income.setName(rs3.getString("name"));
-                                income.setPrice(rs3.getDouble("price"));
-                                income.setCategoryId(rs3.getLong("categoryId"));
-                                income.setUserId(rs3.getLong("userId"));
-                                incomes.add(income);
-                            }
-                            user.setIncome(incomes);
                             ResultSet rs4 = stmt.executeQuery("select * from expenses where userId =" + rs2.getInt("id"));
 
                             while(rs4.next()){
                                 Expenses expense = new Expenses();
                                 expense.setId(rs4.getLong("id"));
+                                expense.setType(rs4.getString("type"));
                                 expense.setName(rs4.getString("name"));
                                 expense.setPrice(rs4.getDouble("price"));
                                 expense.setCategoryId(rs4.getLong("categoryId"));
@@ -183,7 +172,6 @@ public class UserImp implements UserInt {
     public User findOneUser(long id){
         Connection con = DBConnection.connect();
         User user = new User();
-        ArrayList<Income> incomes= new ArrayList<>();
         ArrayList<Expenses> expenses= new ArrayList<>();
         try{
             Statement stmt = con.createStatement();
@@ -191,23 +179,11 @@ public class UserImp implements UserInt {
             ResultSet rs = stmt.executeQuery("select id, username from users where id="+id);
             user.setId(rs.getInt("id"));
             user.setUsername(rs.getString("username"));
-            ResultSet rs2 = stmt.executeQuery("select * from income where userId =" + id);
-
-            while(rs2.next()){
-                Income income = new Income();
-                income.setId(rs2.getLong("id"));
-                income.setName(rs2.getString("name"));
-                income.setPrice(rs2.getDouble("price"));
-                income.setCategoryId(rs2.getLong("categoryId"));
-                income.setUserId(rs2.getLong("userId"));
-                incomes.add(income);
-            }
-            user.setIncome(incomes);
             ResultSet rs3 = stmt.executeQuery("select * from expenses where userId =" +id);
-
             while(rs3.next()){
                 Expenses expense = new Expenses();
                 expense.setId(rs3.getLong("id"));
+                expense.setType(rs3.getString("type"));
                 expense.setName(rs3.getString("name"));
                 expense.setPrice(rs3.getDouble("price"));
                 expense.setCategoryId(rs3.getLong("categoryId"));
@@ -215,6 +191,8 @@ public class UserImp implements UserInt {
                 expenses.add(expense);
             }
             user.setExpenses(expenses);
+
+            //add while loop for categories and categories expenses
         }catch(SQLException e){
             System.out.println(e.getMessage());
         }

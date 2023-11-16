@@ -30,6 +30,7 @@ public class ExpensesImp implements ExpensesInt {
             while(rs.next()){
                 Expenses expense = new Expenses();
                 expense.setId(rs.getLong("id"));
+                expense.setType(rs.getString("type"));
                 expense.setName(rs.getString("name"));
                 expense.setPrice(rs.getDouble("price"));
                 expense.setDate(rs.getString("date"));
@@ -62,6 +63,7 @@ public class ExpensesImp implements ExpensesInt {
             while(rs.next()){
                 exp.setId(rs.getLong("id"));
                 exp.setName(rs.getString("name"));
+                exp.setType(rs.getString("type"));
                 exp.setPrice(rs.getDouble("price"));
                 exp.setDate(rs.getString("date"));
                 exp.setCategoryId(rs.getLong("categoryId"));
@@ -81,12 +83,13 @@ public class ExpensesImp implements ExpensesInt {
 
         try{
 
-            PreparedStatement pstmt = con.prepareStatement("insert into expenses values(null, ?, ?, ?, ?, ?)");
-            pstmt.setString(1, exp.getName());
-            pstmt.setDouble(2, exp.getPrice());
-            pstmt.setString(3, exp.getDate());
-            pstmt.setLong(4, exp.getCategoryId());
-            pstmt.setLong(5, exp.getUserId());
+            PreparedStatement pstmt = con.prepareStatement("insert into expenses values(null,?, ?, ?, ?, ?, ?)");
+            pstmt.setString(1, exp.getType());
+            pstmt.setString(2, exp.getName());
+            pstmt.setDouble(3, exp.getPrice());
+            pstmt.setString(4, exp.getDate());
+            pstmt.setLong(5, exp.getCategoryId());
+            pstmt.setLong(6, exp.getUserId());
             int result = pstmt.executeUpdate();
             if(result != 0){
                 System.out.println("Expense added");
@@ -100,15 +103,16 @@ public class ExpensesImp implements ExpensesInt {
     @Override
     public void updateExpense(Expenses exp) {
         Connection con = DBConnection.connect();
-        String query = "update expenses set name=?, price=?, date=?, categoryId = ?, userId=? where id="+exp.getId();
+        String query = "update expenses set type=?, name=?, price=?, date=?, categoryId = ?, userId=? where id="+exp.getId();
 
         try{
             PreparedStatement pstmt = con.prepareStatement(query);
-            pstmt.setString(1, exp.getName());
-            pstmt.setDouble(2, exp.getPrice());
-            pstmt.setString(3, exp.getDate());
-            pstmt.setLong(4, exp.getCategoryId());
-            pstmt.setLong(5, exp.getUserId());
+            pstmt.setString(1, exp.getType());
+            pstmt.setString(2, exp.getName());
+            pstmt.setDouble(3, exp.getPrice());
+            pstmt.setString(4, exp.getDate());
+            pstmt.setLong(5, exp.getCategoryId());
+            pstmt.setLong(6, exp.getUserId());
             int result = pstmt.executeUpdate();
             if(result != 0){
                 System.out.println("Expense updated");

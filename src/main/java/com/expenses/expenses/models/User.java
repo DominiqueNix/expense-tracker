@@ -6,21 +6,20 @@ public class User {
     private long id;
     private String username;
     private String password;
-    private ArrayList<Income> income;
     private ArrayList<Expenses> expenses;
 
-
+    private ArrayList<Categories> categories;
 
     private boolean isLoggedIn;
 
     public User(){};
 
-    public User(long id, String username, String password, ArrayList<Income> income, ArrayList<Expenses> expenses, boolean isLoggedIn) {
+    public User(long id, String username, String password, ArrayList<Expenses> expenses, ArrayList<Categories> categories,boolean isLoggedIn) {
         this.id = id;
         this.username = username;
         this.password = password;
-        this.income = income;
         this.expenses = expenses;
+        this.categories = categories;
         this.isLoggedIn = isLoggedIn;
     }
 
@@ -49,13 +48,6 @@ public class User {
         this.password = password;
     }
 
-    public ArrayList<Income> getIncome() {
-        return income;
-    }
-
-    public void setIncome(ArrayList<Income> income) {
-        this.income = income;
-    }
 
     public ArrayList<Expenses> getExpenses() {
         return expenses;
@@ -63,6 +55,13 @@ public class User {
 
     public void setExpenses(ArrayList<Expenses> expenses) {
         this.expenses = expenses;
+    }
+    public ArrayList<Categories> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(ArrayList<Categories> categories) {
+        this.categories = categories;
     }
     public boolean isLoggedIn() {
         return isLoggedIn;
@@ -77,7 +76,6 @@ public class User {
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", income=" + income +
                 ", expenses=" + expenses +
                 '}';
     }
