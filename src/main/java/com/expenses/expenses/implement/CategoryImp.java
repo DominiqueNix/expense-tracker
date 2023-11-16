@@ -4,47 +4,34 @@ import com.expenses.expenses.DBConnection;
 import com.expenses.expenses.interfaces.CategoryInt;
 import com.expenses.expenses.models.Categories;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class CategoryImp implements CategoryInt {
-    @Override
-    public ArrayList<Categories> allCategories(long userId) {
-        //create connection
-        //create emplty cat array list
-        //create empty tranactions arraylist
-        //select all from categories where userid=userid
-        //while rs.next, create new category model
-        ///add items to model, then add model to arraylist
-        //select * from income where categoryid = rs.getId();
-        //while rs.next
-        //create income model
-        //add item
-        //add income model to arraylist
-        //return arraylist
 
+    @Override
+    public void addCategory(Categories cat) {
         Connection con = DBConnection.connect();
-        ArrayList<Categories> categories = new ArrayList<>();
-
         try {
-            Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("select * from categories where userId=" + userId);
+            PreparedStatement pstmt = con.prepareStatement("insert into categories values(null, ?, ?)");
+            pstmt.setString(1, cat.getName());
+            pstmt.setLong(2, cat.getUserId());
+            pstmt.executeUpdate();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
         }
-    return null;
-    }
-
-    @Override
-    public void addCategory() {
 
     }
 
     @Override
     public void deleteCategory(long id) {
+        Connection con = DBConnection.connect();
+        try {
+            Statement stmt = con.createStatement();
+            stmt.executeUpdate("delete from categories where id="+id);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 }

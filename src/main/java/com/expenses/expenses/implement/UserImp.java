@@ -2,9 +2,7 @@ package com.expenses.expenses.implement;
 
 import com.expenses.expenses.DBConnection;
 import com.expenses.expenses.interfaces.UserInt;
-import com.expenses.expenses.models.Expenses;
-import com.expenses.expenses.models.Income;
-import com.expenses.expenses.models.User;
+import com.expenses.expenses.models.*;
 import org.sqlite.core.DB;
 
 import java.sql.*;
@@ -173,6 +171,7 @@ public class UserImp implements UserInt {
         Connection con = DBConnection.connect();
         User user = new User();
         ArrayList<Expenses> expenses= new ArrayList<>();
+        ArrayList<Categories> categories= new ArrayList<>();
         try{
             Statement stmt = con.createStatement();
 
@@ -193,10 +192,31 @@ public class UserImp implements UserInt {
             user.setExpenses(expenses);
 
             //add while loop for categories and categories expenses
+            ResultSet rs4 = stmt.executeQuery("select * from categories where userId=" +id);
+            ArrayList<Expenses> catExp = new ArrayList<>();
+            while(rs4.next()){
+                Categories cat = new Categories();
+                cat.setId(rs4.getLong("id"));
+                cat.setName(rs4.getString("name"));
+                cat.setUserId(rs4.getLong("userId"));
+                ResultSet rs5 = stmt.executeQuery("select * from expenses where categoryId="+rs4.getLong("id"));
+                while(rs5.next()){
+                    Expenses expense = new Expenses();
+                    expense.setId(rs3.getLong("id"));
+                    expense.setType(rs3.getString("type"));
+                    expense.setName(rs3.getString("name"));
+                    expense.setPrice(rs3.getDouble("price"));
+                    expense.setCategoryId(rs3.getLong("categoryId"));
+                    expense.setUserId(rs3.getLong("userId"));
+                    catExp.add(expense);
+                }
+                cat.setExpenses(catExp);
+                categories.add(cat);
+            }
+            user.setCategories(categories);
         }catch(SQLException e){
             System.out.println(e.getMessage());
         }
-
         return user;
     }
 
