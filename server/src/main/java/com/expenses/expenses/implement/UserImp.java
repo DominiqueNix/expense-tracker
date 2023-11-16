@@ -3,7 +3,6 @@ package com.expenses.expenses.implement;
 import com.expenses.expenses.DBConnection;
 import com.expenses.expenses.interfaces.UserInt;
 import com.expenses.expenses.models.*;
-import org.sqlite.core.DB;
 
 import java.sql.*;
 import java.util.ArrayList;

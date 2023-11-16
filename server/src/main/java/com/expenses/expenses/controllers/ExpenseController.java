@@ -3,7 +3,6 @@ package com.expenses.expenses.controllers;
 import com.expenses.expenses.implement.ExpensesImp;
 import com.expenses.expenses.interfaces.ExpensesInt;
 import com.expenses.expenses.models.Expenses;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
