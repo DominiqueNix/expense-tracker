@@ -14,6 +14,8 @@ public interface UserInt {
 
     //check if user exists, then return their data
     public User login(String username, String password);
+    //find one user based on id
+    public User findOneUser(long id);
 
     public void deleteUser(long id);
 

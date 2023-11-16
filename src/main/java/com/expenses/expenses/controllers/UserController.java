@@ -37,6 +37,12 @@ public class UserController {
         return user.login(existingUser.getUsername(), existingUser.getPassword());
     }
 
+    @GetMapping("/user/{id}")
+    @ResponseBody
+    public User findOneUser(@PathVariable(value="id") long id){
+        return user.findOneUser(id);
+    }
+
     @DeleteMapping("/users/delete/{id}")
     public void deleteUser(@PathVariable(value="id") long id){
             user.deleteUser(id);
