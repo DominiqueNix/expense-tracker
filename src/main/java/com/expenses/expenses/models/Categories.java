@@ -7,14 +7,14 @@ public class Categories {
     private String name;
     private long userId;
 
-    private ArrayList<Transactions> transactions;
+    private ArrayList<Expenses> expenses;
     public Categories(){};
 
-    public Categories(long id, String name, long userId, ArrayList<Transactions> transactions) {
+    public Categories(long id, String name, long userId, ArrayList<Expenses> expenses) {
         this.id = id;
         this.name = name;
         this.userId = userId;
-        this.transactions = transactions;
+        this.expenses = expenses;
     }
 
     public long getId() {
@@ -39,5 +39,13 @@ public class Categories {
 
     public void setUserId(long userId) {
         this.userId = userId;
+    }
+
+    public ArrayList<Expenses> getExpenses() {
+        return expenses;
+    }
+
+    public void setExpenses(ArrayList<Expenses> expenses) {
+        this.expenses = expenses;
     }
 }
