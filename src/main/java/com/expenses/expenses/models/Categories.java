@@ -1,15 +1,20 @@
 package com.expenses.expenses.models;
 
+import java.util.ArrayList;
+
 public class Categories {
     private long id;
     private String name;
     private long userId;
-    Categories(){};
 
-    public Categories(long id, String name, long userId) {
+    private ArrayList<Transactions> transactions;
+    public Categories(){};
+
+    public Categories(long id, String name, long userId, ArrayList<Transactions> transactions) {
         this.id = id;
         this.name = name;
         this.userId = userId;
+        this.transactions = transactions;
     }
 
     public long getId() {
