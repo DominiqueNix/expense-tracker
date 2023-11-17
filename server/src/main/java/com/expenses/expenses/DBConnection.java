@@ -24,7 +24,7 @@ public class DBConnection {
 
 //            stmt.executeUpdate("drop table users");
 //            stmt.executeUpdate("drop table categories");
-            stmt.executeUpdate("create table if not exists users(id integer primary key autoincrement, username varchar(255), password varchar(255))");
+            stmt.executeUpdate("create table if not exists users(id integer primary key autoincrement, username varchar(255), password varchar(255), loggedIn int)");
             stmt.executeUpdate("create table if not exists categories(id integer primary key autoincrement, name varchar(255), userId integer references users(id))");
 //            stmt.executeUpdate("drop table income");
 //            stmt.executeUpdate("drop table expenses");

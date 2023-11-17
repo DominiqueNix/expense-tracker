@@ -10,17 +10,17 @@ public class User {
 
     private ArrayList<Categories> categories;
 
-    private boolean isLoggedIn;
+    private int loggedIn;
 
     public User(){};
 
-    public User(long id, String username, String password, ArrayList<Expenses> expenses, ArrayList<Categories> categories,boolean isLoggedIn) {
+    public User(long id, String username, String password, ArrayList<Expenses> expenses, ArrayList<Categories> categories, int loggedIn) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.expenses = expenses;
         this.categories = categories;
-        this.isLoggedIn = isLoggedIn;
+        this.loggedIn = loggedIn;
     }
 
 
@@ -63,12 +63,12 @@ public class User {
     public void setCategories(ArrayList<Categories> categories) {
         this.categories = categories;
     }
-    public boolean isLoggedIn() {
-        return isLoggedIn;
+    public int getLoggedIn() {
+        return loggedIn;
     }
 
-    public void setLoggedIn(boolean loggedIn) {
-        isLoggedIn = loggedIn;
+    public void setLoggedIn(int loggedIn) {
+        this.loggedIn = loggedIn;
     }
     @Override
     public String toString() {

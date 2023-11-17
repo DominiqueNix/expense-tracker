@@ -24,10 +24,12 @@ public class UserImp implements UserInt {
                 user.setId(rs.getInt("id"));
                 user.setUsername(rs.getString("username"));
                 user.setPassword(rs.getString("password"));
+                user.setLoggedIn(rs.getInt("loggedIn"));
                 allUsers.add(user);
                 System.out.println(rs.getInt("id"));
                 System.out.println(rs.getString("username"));
                 System.out.println(rs.getString("password"));
+                System.out.println(rs.getString("loggedIn"));
             }
 
         }catch(Exception e){
@@ -43,7 +45,7 @@ public class UserImp implements UserInt {
         Connection con = DBConnection.connect();
 
         try{
-            PreparedStatement pstmt = con.prepareStatement("insert into users values(null, ?, ?)");
+            PreparedStatement pstmt = con.prepareStatement("insert into users values(null, ?, ?, 0)");
             pstmt.setString(1, username);
             pstmt.setString(2, password);
             int result = pstmt.executeUpdate();
@@ -90,7 +92,7 @@ public class UserImp implements UserInt {
                 if(doesUserExist){
                     System.out.println("user exists");
                 } else {
-                    PreparedStatement pstmt = con.prepareStatement("insert into users values(null, ?, ?)");
+                    PreparedStatement pstmt = con.prepareStatement("insert into users values(null, ?, ?, 1)");
                     pstmt.setString(1, username);
                     pstmt.setString(2, password);
                     int result = pstmt.executeUpdate();
@@ -101,13 +103,14 @@ public class UserImp implements UserInt {
 
                     ResultSet rs2 = pstmtGetNewUser.executeQuery();
                     while(rs2.next()){
-                        System.out.println(rs2.getInt("id"));
-                        System.out.println(rs2.getString("username"));
+//                        System.out.println(rs2.getInt("id"));
+//                        System.out.println(rs2.getString("username"));
                         user.setId(rs2.getInt("id"));
                         user.setUsername(rs2.getString("username"));
+                        user.setLoggedIn(rs2.getInt("loggedIn"));
                     }
-                    user.setLoggedIn(true);
-                    }
+//                        user.setLoggedIn(1);
+                }
             }
         }catch(Exception e){
             System.out.println(e.getMessage());
@@ -118,47 +121,55 @@ public class UserImp implements UserInt {
     @Override
     public User login(String username, String password){
                 User user = new User();
-        ArrayList<Income> incomes= new ArrayList<>();
         ArrayList<Expenses> expenses= new ArrayList<>();
         Connection con = DBConnection.connect();
         //selecting all from user where the username from the database = username user input
-        String query = "select username from users";
+//        String query = "select username from users";
         try {
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
-
-            while (rs.next()) {
-                String existingUserName = rs.getString("username");
-                if (existingUserName.equals(username)) {
+//            ResultSet rs = stmt.executeQuery(query);
+//
+//            while (rs.next()) {
+//                String existingUserName = rs.getString("username");
+            System.out.println(username + " username");
+            boolean doesUserExist = doesUserExist(username);
+            System.out.println(doesUserExist + " doesExist");
+                if (doesUserExist) {
                     PreparedStatement pstmtUserInfo = con.prepareStatement("select * from users where username=?");
                     pstmtUserInfo.setString(1, username);
                     ResultSet rs2 = pstmtUserInfo.executeQuery();
                     while(rs2.next()){
                         String usersPass = rs2.getString("password");
+                        System.out.println(usersPass.equals(password) + "password corrent (before)");
                         if(usersPass.equals(password)){
-                            user.setId(rs2.getInt("id"));
-                            user.setUsername(rs2.getString("username"));
-                            user.setLoggedIn(true);
-                            ResultSet rs4 = stmt.executeQuery("select * from expenses where userId =" + rs2.getInt("id"));
-
-                            while(rs4.next()){
-                                Expenses expense = new Expenses();
-                                expense.setId(rs4.getLong("id"));
-                                expense.setType(rs4.getString("type"));
-                                expense.setName(rs4.getString("name"));
-                                expense.setPrice(rs4.getDouble("price"));
-                                expense.setCategoryId(rs4.getLong("categoryId"));
-                                expense.setUserId(rs4.getLong("userId"));
-                                expenses.add(expense);
+                            System.out.println(usersPass.equals(password) + "password corrent (after)");
+                            int res = stmt.executeUpdate("update users set loggedIn = 1 where id="+rs2.getInt("id"));
+                            System.out.println(res + "update command");
+                            if(res != 0){
+                                user.setId(rs2.getInt("id"));
+                                user.setUsername(rs2.getString("username"));
+                                user.setLoggedIn(1);
+                                System.out.println(rs2.getInt("id") + " line 153");
+                                System.out.println(rs2.getString("username") + " line 154");
+//                                ResultSet rs4 = stmt.executeQuery("select * from expenses where userId =" + rs2.getInt("id"));
+//                                while(rs4.next()){
+//                                    Expenses expense = new Expenses();
+//                                    expense.setId(rs4.getLong("id"));
+//                                    expense.setType(rs4.getString("type"));
+//                                    expense.setName(rs4.getString("name"));
+//                                    expense.setPrice(rs4.getDouble("price"));
+//                                    expense.setCategoryId(rs4.getLong("categoryId"));
+//                                    expense.setUserId(rs4.getLong("userId"));
+//                                    expenses.add(expense);
+//                                }
+//                                user.setExpenses(expenses);
                             }
-                            user.setExpenses(expenses);
-                            break;
                         }
                     }
                 } else {
                     System.out.println("user does not exist");
                 }
-            }
+//            }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -174,9 +185,11 @@ public class UserImp implements UserInt {
         try{
             Statement stmt = con.createStatement();
 
-            ResultSet rs = stmt.executeQuery("select id, username from users where id="+id);
+            ResultSet rs = stmt.executeQuery("select id, username, loggedIn from users where id="+id);
             user.setId(rs.getInt("id"));
             user.setUsername(rs.getString("username"));
+//            user.setUsername(rs.getString("username"));
+            user.setLoggedIn(rs.getInt("loggedIn"));
             ResultSet rs3 = stmt.executeQuery("select * from expenses where userId =" +id);
             while(rs3.next()){
                 Expenses expense = new Expenses();
