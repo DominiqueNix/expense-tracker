@@ -1,0 +1,21 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "DBConnection",
+            "request": "launch",
+            "mainClass": "com.expenses.expenses.DBConnection",
+            "projectName": "expenses"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-ExpensesApplication<expenses>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.expenses.expenses.ExpensesApplication",
+            "projectName": "expenses",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

@@ -6,7 +6,7 @@ public class DBConnection {
     public static Connection connect(){
         Connection con = null;
         try{
-            con = DriverManager.getConnection("jdbc:sqlite:server/expenses");
+            con = DriverManager.getConnection("jdbc:sqlite:server/expenses.db");
 
             Statement stmt = con.createStatement();
             stmt.setQueryTimeout(30);
@@ -22,12 +22,12 @@ public class DBConnection {
 //                System.out.println("name= " + rs.getString("name"));
 //            }
 
-//            stmt.executeUpdate("drop table users");
-//            stmt.executeUpdate("drop table categories");
+        //    stmt.executeUpdate("drop table users");
+        //    stmt.executeUpdate("drop table categories");
             stmt.executeUpdate("create table if not exists users(id integer primary key autoincrement, username varchar(255), password varchar(255), loggedIn int)");
             stmt.executeUpdate("create table if not exists categories(id integer primary key autoincrement, name varchar(255), userId integer references users(id))");
 //            stmt.executeUpdate("drop table income");
-//            stmt.executeUpdate("drop table expenses");
+        //    stmt.executeUpdate("drop table expenses");
 //            stmt.executeUpdate("create table if not exists income(id integer primary key autoincrement, name varchar(255), price int,date varchar(255), categoryId integer references categories(id), userId integer references users(id))");
             stmt.executeUpdate("create table if not exists expenses(id integer primary key autoincrement,type varchar(255) ,name varchar(255), price int,date varchar(255), categoryId integer references categories(id), userId integer references users(id))");
 //
@@ -63,7 +63,7 @@ public class DBConnection {
     }
 //
 //    public static void main(String[] args) throws SQLException {
-//        connect();
+    //    connect();
 //       Connection con = connect();
 //
 //        ExpensesInt exp = new ExpensesImp();
