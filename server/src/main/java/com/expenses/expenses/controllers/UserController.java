@@ -26,7 +26,7 @@ public class UserController {
 //        System.out.println(newUser.getUsername() + " " + newUser.getPassword());
         return user.signUp(newUser.getUsername(), newUser.getPassword());
     }
-    @GetMapping("/login")
+    @PutMapping("/login")
     public User login(@RequestBody User existingUser){
         return user.login(existingUser.getUsername(), existingUser.getPassword());
     }
