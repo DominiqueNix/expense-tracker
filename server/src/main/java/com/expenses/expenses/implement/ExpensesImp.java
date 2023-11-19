@@ -103,7 +103,7 @@ public class ExpensesImp implements ExpensesInt {
     @Override
     public void updateExpense(Expenses exp) {
         Connection con = DBConnection.connect();
-        String query = "update expenses set type=?, name=?, price=?, date=?, categoryId = ?, userId=? where id="+exp.getId();
+        String query = "update expenses set type=?, name=?, price=?, date=?, category = ?, userId=? where id="+exp.getId();
 
         try{
             PreparedStatement pstmt = con.prepareStatement(query);

@@ -3,6 +3,10 @@ import * as React from 'react';
 import apiURL from "../api";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import dayjs from 'dayjs';
 
 
 export const AddTransaction =({addTrans, setAddTrans, setSuccess, success, id, categories, setCategories}) => {
@@ -14,6 +18,7 @@ export const AddTransaction =({addTrans, setAddTrans, setSuccess, success, id, c
 
     async function handleAddTransaction(e){
         e.preventDefault();
+        console.log(addTrans)
         const postTrans = await fetch(`${apiURL}/addexpense`, {
             method: 'POST', 
             headers: {
@@ -23,16 +28,19 @@ export const AddTransaction =({addTrans, setAddTrans, setSuccess, success, id, c
         })
 
         const status = await postTrans.status;
-        
-        if(status ==200){
-            setAddTrans({
+
+         setAddTrans({
                 // id: 0, 
                 type: "",
                 name:"", 
                 price: "",
+                date: dayjs().format('YYYY-MM-DD'),
                 category: "",
                 userId: id
             })
+        
+        if(status ==200){
+           
             setSuccess(true)
             setTimeout(() => {
                 setSuccess(false)
@@ -80,13 +88,16 @@ export const AddTransaction =({addTrans, setAddTrans, setSuccess, success, id, c
                             onChange={(e) => setAddTrans({...addTrans, price: e.target.value  })}
                             />
                         </div>
-                        <>
+                        <label htmlFor='categories' className='mt-2'>Catgory</label>
                         <Autocomplete 
-                            sx={{marginTop: "2rem"}}
+                            sx={{marginTop: "1%"}}
                             freeSolo
                             id="categories"
-                            disableClearable
+                            // disableClearable
+                            // defaultValue={null}
+                            onChange={(e) => setAddTrans({...addTrans, category:e.target.textContent})}
                             options={categories}
+
                             // renderInput={(params) => {
                             //     <TextField 
                             //     onChange={(e) => setAddTrans({...addTrans, category: e.target.value})}
@@ -99,12 +110,22 @@ export const AddTransaction =({addTrans, setAddTrans, setSuccess, success, id, c
                             //     />
                             // }}
                             renderInput={(params) => <TextField 
-                                onChange={(e) => setAddTrans({...addTrans, category: e.target.value})}
+                                onChange={(e) => {
+                                    setAddTrans({...addTrans, category: e.target.value})
+                                    // console.log(e)
+                            }}
                                 {...params} label="Search categories" 
                                 />}
                         />
-                        </>
-                        
+                        <div className='mt-3'>
+                        <label htmlFor='date'></label>
+                        <LocalizationProvider  dateAdapter={AdapterDayjs}>
+                            <DatePicker id="date" defaultValue={dayjs()} onChange={(e) =>{ 
+                                // console.log(e)
+                                setAddTrans({...addTrans, date:`${e.$y}-${e.$M+1}-${e.$D}`})
+                        }}/>
+                        </LocalizationProvider>
+                        </div>
                         {/* <div className="form-group p-1">
                             <label htmlFor="category">Category</label>
                             <input type="text" className="form-control" id="category" placeholder="Enter transaction's category" 

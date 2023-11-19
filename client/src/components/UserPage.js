@@ -5,6 +5,7 @@ import { Nav } from "./Nav";
 import { Expenses } from "./Expenses";
 import { AddTransaction } from "./AddTransaction";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import dayjs from "dayjs";
 
 export const UserPage = () => {
 
@@ -19,14 +20,19 @@ export const UserPage = () => {
     const { id } = useParams();
     const navigate = useNavigate();
 
+
+
     const [addTrans, setAddTrans] = useState({
         // id: 0, 
         type: "",
         name:"", 
         price: "",
+        date: dayjs().format('YYYY-MM-DD'),
         category: "",
         userId: id
     })
+
+    // console.log(dayjs().format('YYYY-MM-DD'))
 
     async function fetchUserData(){
         // console.log(id)
