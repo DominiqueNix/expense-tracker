@@ -53,7 +53,7 @@ export const Home = () => {
             <p className="text-center display-6"><i>becuase nothing's too expensive when when you budget</i></p>
 
             <section className="w-75 d-flex flex-row align-items-center justify-content-center mx-auto">
-            <form className="form text-white p-2 m-2 d-flex flex-column justify-content-center" onSubmit={handleLogin}>
+            <form className="home-form form text-white p-2 m-2 d-flex flex-column justify-content-center" onSubmit={handleLogin}>
                 <p className="display-6 text-center">Login</p>
                 <div className="form-group p-2">
                     <label htmlFor="loginUsername">Username</label>
@@ -69,7 +69,7 @@ export const Home = () => {
                 </div>
                 <button type="submit" className="btn submitBtn p-2 m-2">Submit</button>
             </form>
-            <form className="form text-white p-2 m-2 d-flex flex-column justify-content-center" onSubmit={handleSignUp}>
+            <form className="home-form form text-white p-2 m-2 d-flex flex-column justify-content-center" onSubmit={handleSignUp}>
             <p className="display-6 text-center">Sign up</p>
                 <div className="form-group">
                     <label htmlFor="signupUsername p-2">Username</label>

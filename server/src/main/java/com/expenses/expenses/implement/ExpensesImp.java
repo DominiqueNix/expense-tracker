@@ -34,7 +34,7 @@ public class ExpensesImp implements ExpensesInt {
                 expense.setName(rs.getString("name"));
                 expense.setPrice(rs.getDouble("price"));
                 expense.setDate(rs.getString("date"));
-                expense.setCategoryId(rs.getLong("categoryId"));
+                expense.setCategory(rs.getString("category"));
                 expense.setUserId(rs.getLong("userId"));
                 expenses.add(expense);
             }
@@ -66,7 +66,7 @@ public class ExpensesImp implements ExpensesInt {
                 exp.setType(rs.getString("type"));
                 exp.setPrice(rs.getDouble("price"));
                 exp.setDate(rs.getString("date"));
-                exp.setCategoryId(rs.getLong("categoryId"));
+                exp.setCategory(rs.getString("category"));
                 exp.setUserId(rs.getLong("userId"));
             }
         }catch(SQLException e){
@@ -88,7 +88,7 @@ public class ExpensesImp implements ExpensesInt {
             pstmt.setString(2, exp.getName());
             pstmt.setDouble(3, exp.getPrice());
             pstmt.setString(4, exp.getDate());
-            pstmt.setLong(5, exp.getCategoryId());
+            pstmt.setString(5, exp.getCategory());
             pstmt.setLong(6, exp.getUserId());
             int result = pstmt.executeUpdate();
             if(result != 0){
@@ -111,7 +111,7 @@ public class ExpensesImp implements ExpensesInt {
             pstmt.setString(2, exp.getName());
             pstmt.setDouble(3, exp.getPrice());
             pstmt.setString(4, exp.getDate());
-            pstmt.setLong(5, exp.getCategoryId());
+            pstmt.setString(5, exp.getCategory());
             pstmt.setLong(6, exp.getUserId());
             int result = pstmt.executeUpdate();
             if(result != 0){

@@ -25,11 +25,11 @@ public class DBConnection {
         //    stmt.executeUpdate("drop table users");
         //    stmt.executeUpdate("drop table categories");
             stmt.executeUpdate("create table if not exists users(id integer primary key autoincrement, username varchar(255), password varchar(255), loggedIn int)");
-            stmt.executeUpdate("create table if not exists categories(id integer primary key autoincrement, name varchar(255), userId integer references users(id))");
+            // stmt.executeUpdate("create table if not exists categories(id integer primary key autoincrement, name varchar(255), userId integer references users(id))");
 //            stmt.executeUpdate("drop table income");
         //    stmt.executeUpdate("drop table expenses");
 //            stmt.executeUpdate("create table if not exists income(id integer primary key autoincrement, name varchar(255), price int,date varchar(255), categoryId integer references categories(id), userId integer references users(id))");
-            stmt.executeUpdate("create table if not exists expenses(id integer primary key autoincrement,type varchar(255) ,name varchar(255), price int,date varchar(255), categoryId integer references categories(id), userId integer references users(id))");
+            stmt.executeUpdate("create table if not exists expenses(id integer primary key autoincrement,type varchar(255) ,name varchar(255), price int,date varchar(255), category varchar(255), userId integer references users(id))");
 //
 
 

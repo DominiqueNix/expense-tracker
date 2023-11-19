@@ -1,8 +1,11 @@
-import React, { useState } from "react"
+// import React, { useState } from "react"
+import * as React from 'react';
 import apiURL from "../api";
+import TextField from "@mui/material/TextField";
+import Autocomplete from "@mui/material/Autocomplete";
 
 
-export const AddTransaction =({addTrans, setAddTrans, setSuccess, success}) => {
+export const AddTransaction =({addTrans, setAddTrans, setSuccess, success, id, categories, setCategories}) => {
 
     // function handleChange(e){
     //     console.log()
@@ -22,6 +25,14 @@ export const AddTransaction =({addTrans, setAddTrans, setSuccess, success}) => {
         const status = await postTrans.status;
         
         if(status ==200){
+            setAddTrans({
+                // id: 0, 
+                type: "",
+                name:"", 
+                price: "",
+                category: "",
+                userId: id
+            })
             setSuccess(true)
             setTimeout(() => {
                 setSuccess(false)
@@ -45,7 +56,7 @@ export const AddTransaction =({addTrans, setAddTrans, setSuccess, success}) => {
                         <h5 className="display-5">Add Transaction</h5>
                     </div>
                     <div className="modal-body">
-                    <form className="form text-white p-1 d-flex flex-column justify-content-center">
+                    <form className="form p-1 d-flex flex-column justify-content-center">
                         <div className="form-group p-1">
                             <label htmlFor="type">Select Type</label>
                             <select class="form-control"  id="type" name="type"
@@ -69,6 +80,31 @@ export const AddTransaction =({addTrans, setAddTrans, setSuccess, success}) => {
                             onChange={(e) => setAddTrans({...addTrans, price: e.target.value  })}
                             />
                         </div>
+                        <>
+                        <Autocomplete 
+                            sx={{marginTop: "2rem"}}
+                            freeSolo
+                            id="categories"
+                            disableClearable
+                            options={categories}
+                            // renderInput={(params) => {
+                            //     <TextField 
+                            //     onChange={(e) => setAddTrans({...addTrans, category: e.target.value})}
+                            //     {...params}
+                            //     label="Search Categories"
+                            //     InputProps={{
+                            //         ...params.InputProps, 
+                            //         type:"search",
+                            //     }}
+                            //     />
+                            // }}
+                            renderInput={(params) => <TextField 
+                                onChange={(e) => setAddTrans({...addTrans, category: e.target.value})}
+                                {...params} label="Search categories" 
+                                />}
+                        />
+                        </>
+                        
                         {/* <div className="form-group p-1">
                             <label htmlFor="category">Category</label>
                             <input type="text" className="form-control" id="category" placeholder="Enter transaction's category" 
@@ -81,7 +117,7 @@ export const AddTransaction =({addTrans, setAddTrans, setSuccess, success}) => {
                     </div>
                     <div className="modal-footer">
                         <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" className="btn btn-primary" onClick={handleAddTransaction}>Save changes</button>
+                        <button type="button" className="btn btn-primary" onClick={handleAddTransaction} data-dismiss="modal">Save changes</button>
                     </div>
                 </div>
             </div>
