@@ -6,17 +6,17 @@ public class Expenses{
     private String name;
     private double price;
     private String date;
-    private long categoryId;
+    private String category;
     private long userId;
     public Expenses(){};
 
-    public Expenses(long id, String type, String name, double price, String date, long categoryId, long userId) {
+    public Expenses(long id, String type, String name, double price, String date, String category, long userId) {
         this.id = id;
         this.type = type;
         this.name = name;
         this.price = price;
         this.date = date;
-        this.categoryId = categoryId;
+        this.category = category;
         this.userId = userId;
     }
 
@@ -60,12 +60,12 @@ public class Expenses{
         this.date = date;
     }
 
-    public long getCategoryId() {
-        return categoryId;
+    public String getCategory() {
+        return category;
     }
 
-    public void setCategoryId(long categoryId) {
-        this.categoryId = categoryId;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public long getUserId() {

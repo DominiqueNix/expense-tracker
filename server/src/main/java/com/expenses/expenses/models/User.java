@@ -8,18 +8,18 @@ public class User {
     private String password;
     private ArrayList<Expenses> expenses;
 
-    private ArrayList<Categories> categories;
+    // private ArrayList<Categories> categories;
 
     private int loggedIn;
 
     public User(){};
 
-    public User(long id, String username, String password, ArrayList<Expenses> expenses, ArrayList<Categories> categories, int loggedIn) {
+    public User(long id, String username, String password, ArrayList<Expenses> expenses, int loggedIn) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.expenses = expenses;
-        this.categories = categories;
+        // this.categories = categories;
         this.loggedIn = loggedIn;
     }
 
@@ -56,13 +56,13 @@ public class User {
     public void setExpenses(ArrayList<Expenses> expenses) {
         this.expenses = expenses;
     }
-    public ArrayList<Categories> getCategories() {
-        return categories;
-    }
+    // public ArrayList<Categories> getCategories() {
+    //     return categories;
+    // }
 
-    public void setCategories(ArrayList<Categories> categories) {
-        this.categories = categories;
-    }
+    // public void setCategories(ArrayList<Categories> categories) {
+    //     this.categories = categories;
+    // }
     public int getLoggedIn() {
         return loggedIn;
     }
