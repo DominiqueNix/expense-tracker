@@ -7,6 +7,7 @@ import { AddTransaction } from "./AddTransaction";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import dayjs from "dayjs";
 import { PieChart } from '@mui/x-charts/PieChart'
+import {BarChart} from '@mui/x-charts/BarChart'
 
 export const UserPage = () => {
 
@@ -34,11 +35,8 @@ export const UserPage = () => {
         category: "",
         userId: id
     })
-// console.log(addTrans)
-    // console.log(dayjs().format('YYYY-MM-DD'))
 
     async function fetchUserData(){
-        // console.log(id)
         const res = await fetch(`${apiURL}/user/${id}`)
         const data = await res.json();
 
@@ -72,7 +70,6 @@ export const UserPage = () => {
         let catAndTot = [];
 
         for(let i=0; i < cat.length; i++){
-            let count = 0;
             let obj = {
                 value: 0,
                 label: ""
@@ -133,7 +130,7 @@ export const UserPage = () => {
 
                 <div className="middle-wrapper d-flex flex-column ">
                   <section className="total-wrapper d-flex align-items-center justify-content-center">
-                    <div className="total d-flex">                    
+                    <div className="total d-flex justify-content-around">                    
                         <section className="total-balace d-flex flex-column align-items-center justify-content-center p-2">
                             <h1 className="display-6">Total Balance</h1>
                             { total !== 0 && (
@@ -146,11 +143,18 @@ export const UserPage = () => {
                                 <p><i className="bi bi-arrow-down-circle"></i> Expenses: ${totalExpPrice.toFixed(2)}</p>
                             )}
                         </section>
-                        <section className="budget"></section>
+                        <section className="budget">
+                        <BarChart
+                            xAxis={[{scaleType: 'band',data: ['Income', 'Expenses'] }]}
+                            series={[{ data: [totalIncPrice, totalExpPrice] }]} 
+                            width= {300}
+                            height= {300}
+                        />
+                        </section>
                     </div>
                 </section>
                 <AddTransaction addTrans={addTrans} setAddTrans={setAddTrans} setSuccess={setSuccess} success={success} id={id} categories={categories} setCategories={setCategories}/>
-                <section className="chart d-flex justify-content-center align-items-start flex-column">
+                <section className="chart d-flex justify-content-center align-items-center flex-column">
                 <h1 className="display-6 pt-4">Spending breakdown</h1>
                 <PieChart
                     series={[

@@ -19,6 +19,8 @@ export const AddTransaction =({addTrans, setAddTrans, setSuccess, success, id, c
     //     setAddTrans({...addTrans, name: e.target.value  })
     // }
 
+    //DATE PICKER ISN"T BEING RESET, BUT THE ACTUAL DATE IS
+    //IF USER DOESN"T CAHGNE THE TYPE THEN THE TYPE WILL GO IN A S AN EMPTY STRING
     async function handleAddTransaction(e){
         e.preventDefault();
         console.log(addTrans)
@@ -31,24 +33,17 @@ export const AddTransaction =({addTrans, setAddTrans, setSuccess, success, id, c
         })
 
         const status = postTrans.status;
-
-        
-        
         if(status === 200){
-            
-            console.log(addTrans)
-           
             setSuccess(true)
             setTimeout(() => {
                 setSuccess(false)
-            }, 3000)
+            }, 1000)
         }
         setAddTrans({
-                                    // id: 0, 
-            type: "",
+            type: addTrans.type,
             name:"", 
             price: "",
-            date: dayjs().format('YYYY-MM-DD'),
+            date: addTrans.date,
             category: "",
             userId: id
         })
@@ -74,10 +69,10 @@ export const AddTransaction =({addTrans, setAddTrans, setSuccess, success, id, c
                     <div className="modal-body"> 
                         <div className="form-group p-1">
                             <label htmlFor="type">Select Type</label>
-                            <select className="form-control"  id="type" name="type" defaultValue={""}
-                            onChange={(e) => setAddTrans({...addTrans, type: e.target.value  })}
+                            <select className="form-control"  id="type" name="type"
+                            onChange={(e) => setAddTrans({...addTrans, type: e.target.value  })} required
                             >
-                                 <option value=""></option>
+                                 {/* <option value=""></option> */}
                                 <option value="income">Income</option>
                                 <option value="expense">Expense</option>
                             </select>
