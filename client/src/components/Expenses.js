@@ -22,9 +22,9 @@ export const Expenses =({expenses, title, categories}) =>{
             {
                 expenses.map(exp => (
                 <div key={exp.id}>
-                    <button className="btn each-exp" data-toggle="modal" data-target="#single-item">{exp.name.toUpperCase()}.....${exp.price}</button>
-                    <div className="modal fade" id="single-item" tabIndex={-1} role="dialog" aria-hidden="true">
-                        <div className="modal-dialog modal-dialog-centered" role="document">
+                    <button className="btn each-exp" data-toggle="modal" data-target={`#${exp.id}`}>{exp.name.toUpperCase()}.....${exp.price}</button>
+                    <div className="modal fade" id={`${exp.id}`} tabIndex={-1} role="dialog" aria-hidden="true">
+                        <div className="modal-dialog modal-dialog-centered">
                             <div className="modal-content">
                             {updating ? (
                                 <>
@@ -35,7 +35,7 @@ export const Expenses =({expenses, title, categories}) =>{
                                     <div className="modal-body"> 
                                         <div className="form-group p-1">
                                             <label htmlFor="type">Select Type</label>
-                                                <select class="form-control"  id="type" name="type" defaultValue="income"
+                                                <select className="form-control"  id="type" name="type" defaultValue={exp.type}
                                                     // onChange={(e) => setAddTrans({...addTrans, type: e.target.value  })}
                                                 >
                                                     <option value="income">Income</option>
@@ -45,6 +45,7 @@ export const Expenses =({expenses, title, categories}) =>{
                                         <div className="form-group p-1">
                                             <label htmlFor="name">Name</label>
                                             <input type="text" className="form-control" id="name" placeholder="Enter transaction name" name="name"
+                                                defaultValue={exp.name}
                                                 // value={addTrans.name}
                                                 // onChange={(e) => setAddTrans({...addTrans, name: e.target.value  })}
                                             />
@@ -52,6 +53,7 @@ export const Expenses =({expenses, title, categories}) =>{
                                         <div className="form-group p-1">
                                             <label htmlFor="price">Price</label>
                                             <input type="text" className="form-control" id="price" placeholder="Enter transaction price" name="price"
+                                                defaultValue={exp.name}
                                                 // value={addTrans.price}
                                                 // onChange={(e) => setAddTrans({...addTrans, price: e.target.value  })}
                                             />
@@ -61,6 +63,7 @@ export const Expenses =({expenses, title, categories}) =>{
                                             sx={{marginTop: "1%"}}
                                             freeSolo
                                             id="categories"
+                                            defaultValue={exp.category}
                                             // key={success}
                                             // disableClearable
                                             // defaultValue={null}
@@ -77,7 +80,7 @@ export const Expenses =({expenses, title, categories}) =>{
                                         <div className='mt-3'>
                                             {/* <label htmlFor='date'>Date</label> */}
                                             <LocalizationProvider  dateAdapter={AdapterDayjs}>
-                                                <DatePicker id="date" defaultValue={dayjs()} onChange={(e) =>{                                           // console.log(e)
+                                                <DatePicker id="date" defaultValue={dayjs(exp.date)} onChange={(e) =>{                                           // console.log(e)
                                                             //    setAddTrans({...addTrans, date:`${e.$y}-${e.$M+1}-${e.$D}`})
                                                 }}/>
                                             </LocalizationProvider>
@@ -92,7 +95,7 @@ export const Expenses =({expenses, title, categories}) =>{
                             ):(
                                 <>
                                 <div className="modal-header">
-                                    <h1 className="modal-title">
+                                    <h1 className="modal-title display-5">
                                         {exp.name}
                                     </h1>
                                     <button type="button" className="close btn" data-dismiss="modal">

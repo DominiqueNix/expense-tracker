@@ -18,6 +18,7 @@ export const UserPage = () => {
     const [totalExpPrice, setTotalExpPrice] = useState(0);
     const [totalIncPrice, setTotalIncPrice] = useState(0);
     const [categories, setCategories] = useState([]);
+    const [catAndTot, setCatandTot] = useState([])
     const { id } = useParams();
     const navigate = useNavigate();
 
@@ -66,7 +67,30 @@ export const UserPage = () => {
         setTotalIncPrice(totIn)
         setTotal(totIn-totOut)
         setUserData(data)
+
+        let catAndTot = [];
+
+        for(let i=0; i < cat.length; i++){
+            let count = 0;
+            for(let j=0; j< data.expenses.length; j++){
+                if(data.expenses[j].category === cat[i]){
+                    count += data.expenses[j].price
+                }
+            }
+            let obj = {
+                value: 0,
+                label: ""
+            }
+
+            obj.value = count;
+            obj.label = cat[i];
+
+            catAndTot.push(obj);
+        }
+        setCatandTot(catAndTot);
     }
+
+
 
     useEffect(()=>{
         fetchUserData();
@@ -105,11 +129,12 @@ export const UserPage = () => {
                     </div>
                 </section>
                 <AddTransaction addTrans={addTrans} setAddTrans={setAddTrans} setSuccess={setSuccess} success={success} id={id} categories={categories} setCategories={setCategories}/>
-                <section className="chart d-flex justify-content-center align0items-center">
+                <section className="chart d-flex justify-content-center align-items-center flex-column">
+                <h1 className="display-6 pt-4">Spending breakdown</h1>
                 <PieChart
                     series={[
                             {
-                            data: [{ value: 100, label: "test1" }, { value: 50, label: "test2" }, { value: 50, label: "test3" }],
+                            data: catAndTot,
                             innerRadius: 30,
                             outerRadius: 100,
                             paddingAngle: 0,
@@ -138,9 +163,9 @@ export const UserPage = () => {
            )}
            </>
         ) : (
-            <div class="text-center">
-                <div class="spinner-border" role="status">
-                    <span class="sr-only">Loading...</span>
+            <div className="text-center">
+                <div className="spinner-border" role="status">
+                    <span className="sr-only">Loading...</span>
                 </div>
             </div>
         )} 

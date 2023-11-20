@@ -61,7 +61,7 @@ export const AddTransaction =({addTrans, setAddTrans, setSuccess, success, id, c
                 {/* ADD TRANSACTION MODAL SECTION */}
         <div className="modal fade" id="addTrans" tabIndex={-1} role="dialog">
         { success && (
-                <div class="alert alert-success w-75 mx-auto mt-5" role="alert">
+                <div className="alert alert-success w-75 mx-auto mt-5" role="alert">
                      Transaction Added!
                 </div>
              )} 
@@ -74,9 +74,10 @@ export const AddTransaction =({addTrans, setAddTrans, setSuccess, success, id, c
                     <div className="modal-body"> 
                         <div className="form-group p-1">
                             <label htmlFor="type">Select Type</label>
-                            <select class="form-control"  id="type" name="type" defaultValue="income"
+                            <select className="form-control"  id="type" name="type" defaultValue={""}
                             onChange={(e) => setAddTrans({...addTrans, type: e.target.value  })}
                             >
+                                 <option value=""></option>
                                 <option value="income">Income</option>
                                 <option value="expense">Expense</option>
                             </select>
