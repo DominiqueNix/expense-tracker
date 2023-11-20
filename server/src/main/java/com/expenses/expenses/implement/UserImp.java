@@ -197,6 +197,7 @@ public class UserImp implements UserInt {
                 expense.setType(rs3.getString("type"));
                 expense.setName(rs3.getString("name"));
                 expense.setPrice(rs3.getDouble("price"));
+                expense.setDate(rs3.getString("date"));
                 expense.setCategory(rs3.getString("category"));
                 expense.setUserId(rs3.getLong("userId"));
                 expenses.add(expense);
