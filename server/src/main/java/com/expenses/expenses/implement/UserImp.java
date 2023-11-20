@@ -203,30 +203,6 @@ public class UserImp implements UserInt {
                 expenses.add(expense);
             }
             user.setExpenses(expenses);
-
-            //add while loop for categories and categories expenses
-            // ResultSet rs4 = stmt.executeQuery("select * from categories where userId=" +id);
-            // ArrayList<Expenses> catExp = new ArrayList<>();
-            // while(rs4.next()){
-            //     Categories cat = new Categories();
-            //     cat.setId(rs4.getLong("id"));
-            //     cat.setName(rs4.getString("name"));
-            //     cat.setUserId(rs4.getLong("userId"));
-            //     ResultSet rs5 = stmt.executeQuery("select * from expenses where categoryId="+rs4.getLong("id"));
-            //     while(rs5.next()){
-            //         Expenses expense = new Expenses();
-            //         expense.setId(rs3.getLong("id"));
-            //         expense.setType(rs3.getString("type"));
-            //         expense.setName(rs3.getString("name"));
-            //         expense.setPrice(rs3.getDouble("price"));
-            //         expense.setCategoryId(rs3.getLong("categoryId"));
-            //         expense.setUserId(rs3.getLong("userId"));
-            //         catExp.add(expense);
-            //     }
-            //     cat.setExpenses(catExp);
-            //     categories.add(cat);
-            // }
-            // user.setCategories(categories);
         }catch(SQLException e){
             System.out.println(e.getMessage());
         }
@@ -239,6 +215,18 @@ public class UserImp implements UserInt {
         try{
             Statement stmt = con.createStatement();
             stmt.executeUpdate("delete from users where id="+id);
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    @Override
+    public void logout(long id){
+        Connection con = DBConnection.connect();
+
+        try{
+            Statement stmt = con.createStatement();
+            stmt.executeQuery("update users set loggedIn = 0 where id="+id);
         }catch(Exception e){
             System.out.println(e.getMessage());
         }
