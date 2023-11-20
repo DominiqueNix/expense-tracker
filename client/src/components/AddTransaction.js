@@ -9,6 +9,9 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs from 'dayjs';
 
 
+//TODO: TYPE DROPDOWN NEEDS TO RESET
+//TODO: CALENDER NEEDS TO RESET TO CURRENT DATE
+
 export const AddTransaction =({addTrans, setAddTrans, setSuccess, success, id, categories, setCategories}) => {
 
     // function handleChange(e){
@@ -27,25 +30,29 @@ export const AddTransaction =({addTrans, setAddTrans, setSuccess, success, id, c
             body: JSON.stringify(addTrans)
         })
 
-        const status = await postTrans.status;
+        const status = postTrans.status;
 
-         setAddTrans({
-                // id: 0, 
-                type: "",
-                name:"", 
-                price: "",
-                date: dayjs().format('YYYY-MM-DD'),
-                category: "",
-                userId: id
-            })
         
-        if(status ==200){
+        
+        if(status === 200){
+            
+            console.log(addTrans)
            
             setSuccess(true)
             setTimeout(() => {
                 setSuccess(false)
             }, 3000)
         }
+        setAddTrans({
+                                    // id: 0, 
+            type: "",
+            name:"", 
+            price: "",
+            date: dayjs().format('YYYY-MM-DD'),
+            category: "",
+            serId: id
+        })
+
     }
 
     return(
@@ -63,11 +70,11 @@ export const AddTransaction =({addTrans, setAddTrans, setSuccess, success, id, c
                     <div className="modal-header">
                         <h5 className="display-5">Add Transaction</h5>
                     </div>
-                    <div className="modal-body">
-                    <form className="form p-1 d-flex flex-column justify-content-center">
+                    <form className="form p-1 d-flex flex-column justify-content-center" onSubmit={handleAddTransaction}>
+                    <div className="modal-body"> 
                         <div className="form-group p-1">
                             <label htmlFor="type">Select Type</label>
-                            <select class="form-control"  id="type" name="type"
+                            <select class="form-control"  id="type" name="type" defaultValue="income"
                             onChange={(e) => setAddTrans({...addTrans, type: e.target.value  })}
                             >
                                 <option value="income">Income</option>
@@ -88,11 +95,12 @@ export const AddTransaction =({addTrans, setAddTrans, setSuccess, success, id, c
                             onChange={(e) => setAddTrans({...addTrans, price: e.target.value  })}
                             />
                         </div>
-                        <label htmlFor='categories' className='mt-2'>Catgory</label>
+                        <label htmlFor='categories' className='mt-2'>Category</label>
                         <Autocomplete 
                             sx={{marginTop: "1%"}}
                             freeSolo
                             id="categories"
+                            key={success}
                             // disableClearable
                             // defaultValue={null}
                             onChange={(e) => setAddTrans({...addTrans, category:e.target.textContent})}
@@ -133,14 +141,14 @@ export const AddTransaction =({addTrans, setAddTrans, setSuccess, success, id, c
                             // onChange={(e) => setlogin({...login, password: e.target.value})}
                             />
                         </div> */}
-                       
-                    </form>
                     </div>
                     <div className="modal-footer">
                         <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" className="btn btn-primary" onClick={handleAddTransaction} data-dismiss="modal">Save changes</button>
+                        <button type="submit" className="btn btn-primary">Save changes</button>
                     </div>
+                    </form>
                 </div>
+                
             </div>
         </div>
         </>
