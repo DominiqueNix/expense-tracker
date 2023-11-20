@@ -40,4 +40,9 @@ public class UserController {
     public void deleteUser(@PathVariable(value="id") long id){
             user.deleteUser(id);
     }
+
+    @PutMapping("/logout/{id}")
+    public void logout(@PathVariable(value="id") long id){
+        user.logout(id);
+    }
 }

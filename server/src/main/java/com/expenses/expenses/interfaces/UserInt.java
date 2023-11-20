@@ -19,6 +19,7 @@ public interface UserInt {
 
     public void deleteUser(long id);
 
+    public void logout(long id);
 
     //extra!!
     //update user

@@ -96,6 +96,23 @@ export const UserPage = () => {
     //     console.log(userData)
     //  }
 
+    async function logout(e){
+        e.preventDefault();
+        try{
+            const putTrans = await fetch(`${apiURL}/logout/${id}`, {
+                method: 'PUT', 
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+           
+            navigate('/')
+        }catch(err){
+            console.log(err)
+        }
+        
+    }
+
     useEffect(()=>{
         fetchUserData();
     }, [success, updating])
@@ -108,7 +125,7 @@ export const UserPage = () => {
              { userData.loggedIn === 1 ? ( 
             <>
             {/* Pass through username and id */}
-                <Nav userData={userData}/>
+                <Nav userData={userData} logout={logout}/>
                 <div className="d-flex main-content justify-content-around mx-auto">
                   {/* pass through an object of expenses */}
 
@@ -160,10 +177,18 @@ export const UserPage = () => {
                 
             </>
              ) : (
-            <>
-            <h1>Please Login</h1>
-            <button onClick={() => navigate("/")} className="btn">GO HOME</button>
-            </>
+            <section className="d-flex justify-content-center align-items-center">
+            <div className="card" style={{width: "18rem"}}>
+                <h1 className="display-2 text-center"><i class="bi bi-exclamation-triangle"></i></h1>
+                <div className="card-body">
+                    <p className="card-text">Must be logged in to view this page. Plase go home and login first.</p>
+                </div>
+                <div className="mx-auto">
+                   <button onClick={() => navigate("/")} className="btn btn-primary">GO HOME</button> 
+                </div>
+            </div>
+            
+            </section>
            )}
            </>
         ) : (
