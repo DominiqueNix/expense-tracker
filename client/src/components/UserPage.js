@@ -19,6 +19,7 @@ export const UserPage = () => {
     const [totalIncPrice, setTotalIncPrice] = useState(0);
     const [categories, setCategories] = useState([]);
     const [catAndTot, setCatandTot] = useState([])
+    const [updating, setUpdating] = useState(false)
     const { id } = useParams();
     const navigate = useNavigate();
 
@@ -33,7 +34,7 @@ export const UserPage = () => {
         category: "",
         userId: id
     })
-
+// console.log(addTrans)
     // console.log(dayjs().format('YYYY-MM-DD'))
 
     async function fetchUserData(){
@@ -72,29 +73,32 @@ export const UserPage = () => {
 
         for(let i=0; i < cat.length; i++){
             let count = 0;
-            for(let j=0; j< data.expenses.length; j++){
-                if(data.expenses[j].category === cat[i]){
-                    count += data.expenses[j].price
-                }
-            }
             let obj = {
                 value: 0,
                 label: ""
             }
 
-            obj.value = count;
-            obj.label = cat[i];
-
-            catAndTot.push(obj);
+            for(let j=0; j< data.expenses.length; j++){
+                if(data.expenses[j].category === cat[i] && data.expenses[j].type === "expense"){
+                    obj.value += data.expenses[j].price
+                    obj.label = cat[i]
+                }
+            }
+            
+            if(obj.label !== ""){
+                catAndTot.push(obj);
+            }
+            
         }
         setCatandTot(catAndTot);
     }
-
-
+    //  if(userData){
+    //     console.log(userData)
+    //  }
 
     useEffect(()=>{
         fetchUserData();
-    }, [success])
+    }, [success, updating])
 
     return(
         
@@ -108,7 +112,7 @@ export const UserPage = () => {
                 <div className="d-flex main-content justify-content-around mx-auto">
                   {/* pass through an object of expenses */}
 
-                <Expenses title={"Income"} expenses={income} categories={categories}/>
+                <Expenses title={"Income"} expenses={income} categories={categories} updating={updating} setUpdating={setUpdating} id={id} success={success} setSuccess={setSuccess}/>
 
                 <div className="middle-wrapper d-flex flex-column ">
                   <section className="total-wrapper d-flex align-items-center justify-content-center">
@@ -116,20 +120,20 @@ export const UserPage = () => {
                         <section className="total-balace d-flex flex-column align-items-center justify-content-center p-2">
                             <h1 className="display-6">Total Balance</h1>
                             { total !== 0 && (
-                                <p className="display-6">{total}</p>
+                                <p className="display-6">{total.toFixed(2)}</p>
                             )}
                              { totalIncPrice !== 0 && (
-                                <p><i className="bi bi-arrow-up-circle"></i> Income: ${totalIncPrice}</p>
+                                <p><i className="bi bi-arrow-up-circle"></i> Income: ${totalIncPrice.toFixed(2)}</p>
                             )}
                              { totalExpPrice !== 0 && (
-                                <p><i className="bi bi-arrow-down-circle"></i> Expenses: ${totalExpPrice}</p>
+                                <p><i className="bi bi-arrow-down-circle"></i> Expenses: ${totalExpPrice.toFixed(2)}</p>
                             )}
                         </section>
                         <section className="budget"></section>
                     </div>
                 </section>
                 <AddTransaction addTrans={addTrans} setAddTrans={setAddTrans} setSuccess={setSuccess} success={success} id={id} categories={categories} setCategories={setCategories}/>
-                <section className="chart d-flex justify-content-center align-items-center flex-column">
+                <section className="chart d-flex justify-content-center align-items-start flex-column">
                 <h1 className="display-6 pt-4">Spending breakdown</h1>
                 <PieChart
                     series={[
@@ -151,7 +155,7 @@ export const UserPage = () => {
                 
 
                 {/* pass through an object of income */}
-                <Expenses title={"Expenses"} expenses={expenses} categories={categories}/>  
+                <Expenses title={"Expenses"} expenses={expenses} categories={categories} updating={updating} setUpdating={setUpdating} id={id} success={success} setSuccess={setSuccess}/>  
                 </div>
                 
             </>

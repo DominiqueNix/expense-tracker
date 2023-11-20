@@ -50,7 +50,7 @@ export const AddTransaction =({addTrans, setAddTrans, setSuccess, success, id, c
             price: "",
             date: dayjs().format('YYYY-MM-DD'),
             category: "",
-            serId: id
+            userId: id
         })
 
     }
