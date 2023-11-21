@@ -24,6 +24,16 @@ export const UserPage = () => {
     const { id } = useParams();
     const navigate = useNavigate();
 
+    //Monthly view refactor
+        //have array called monexp 
+        //create state for each month
+        //create over total fpor each month
+        //create state forr each
+        //in fetch call set anny array of objects to each month delepending on date of tranaction
+
+        //when view changes set the month expenses equal to the month picked (switch statement )
+    // const [view, setView] = useState("");
+    // const months = ["Jan", "Feb", "Mar","Apr" ,"May", "Jun", "Jul", "Aug", "Sep","Oct","Nov", "Dec", "Year"];
 
 
     const [addTrans, setAddTrans] = useState({
@@ -123,8 +133,13 @@ export const UserPage = () => {
             <>
             {/* Pass through username and id */}
                 <Nav userData={userData} logout={logout}/>
+
+                {/* do a ternary that sees if the  */}
+
+
                 <div className="d-flex main-content justify-content-around mx-auto">
                   {/* pass through an object of expenses */}
+
 
                 <Expenses title={"Income"} expenses={income} categories={categories} updating={updating} setUpdating={setUpdating} id={id} success={success} setSuccess={setSuccess}/>
 
@@ -178,6 +193,11 @@ export const UserPage = () => {
                 {/* pass through an object of income */}
                 <Expenses title={"Expenses"} expenses={expenses} categories={categories} updating={updating} setUpdating={setUpdating} id={id} success={success} setSuccess={setSuccess}/>  
                 </div>
+
+
+
+
+
                 
             </>
              ) : (
