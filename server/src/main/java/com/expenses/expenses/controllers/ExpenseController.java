@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 public class ExpenseController {
     ExpensesInt exp = new ExpensesImp();
 
-    // for now...only need to get one transaction, all transactions are found when I find one user (there is not separe page for finding all transactions)
     @GetMapping("/expenses/{id}")
     public Expenses findOneExpense(@PathVariable(value = "id") long id){
         return exp.getOneExpense(id);

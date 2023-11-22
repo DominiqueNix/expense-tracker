@@ -23,7 +23,6 @@ public class UserController {
     }
     @PostMapping("/signup")
     public User signup(@RequestBody User newUser){
-//        System.out.println(newUser.getUsername() + " " + newUser.getPassword());
         return user.signUp(newUser.getUsername(), newUser.getPassword());
     }
     @PutMapping("/login")

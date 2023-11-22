@@ -24,21 +24,9 @@ export const UserPage = () => {
     const { id } = useParams();
     const navigate = useNavigate();
 
-    //Monthly view refactor
-        //have array called monexp 
-        //create state for each month
-        //create over total fpor each month
-        //create state forr each
-        //in fetch call set anny array of objects to each month delepending on date of tranaction
-
-        //when view changes set the month expenses equal to the month picked (switch statement )
-    // const [view, setView] = useState("");
-    // const months = ["Jan", "Feb", "Mar","Apr" ,"May", "Jun", "Jul", "Aug", "Sep","Oct","Nov", "Dec", "Year"];
-
 
     const [addTrans, setAddTrans] = useState({
-        // id: 0, 
-        type: "",
+        type: "income",
         name:"", 
         price: "",
         date: dayjs().format('YYYY-MM-DD'),
@@ -46,8 +34,10 @@ export const UserPage = () => {
         userId: id
     })
 
+//fetch user data and sets the satae for all categoies for a user, total net for a user, total expenses for a user, total income for a user
     async function fetchUserData(){
-        const res = await fetch(`${apiURL}/user/${id}`)
+        let url =`${apiURL}/user/${id}`
+        const res = await fetch(url)
         const data = await res.json();
 
         let cat = [];
@@ -103,10 +93,13 @@ export const UserPage = () => {
     //     console.log(userData)
     //  }
 
+
+    //fetchs logout route for a user
     async function logout(e){
         e.preventDefault();
+        let url = `${apiURL}/logout/${id}`
         try{
-            const putTrans = await fetch(`${apiURL}/logout/${id}`, {
+            const putTrans = await fetch(url, {
                 method: 'PUT', 
                 headers: {
                     'Content-Type': 'application/json'
@@ -131,25 +124,17 @@ export const UserPage = () => {
              <> 
              { userData.loggedIn === 1 ? ( 
             <>
-            {/* Pass through username and id */}
-                <Nav userData={userData} logout={logout}/>
-
-                {/* do a ternary that sees if the  */}
-
-
+                <Nav userData={userData} logout={logout} id={id} navigate={navigate}/>
                 <div className="d-flex main-content justify-content-around mx-auto">
-                  {/* pass through an object of expenses */}
-
-
                 <Expenses title={"Income"} expenses={income} categories={categories} updating={updating} setUpdating={setUpdating} id={id} success={success} setSuccess={setSuccess}/>
 
                 <div className="middle-wrapper d-flex flex-column ">
                   <section className="total-wrapper d-flex align-items-center justify-content-center">
-                    <div className="total d-flex justify-content-around">                    
+                    <div className="total d-flex justify-content-between">                    
                         <section className="total-balace d-flex flex-column align-items-center justify-content-center p-2">
-                            <h1 className="display-6">Total Balance</h1>
+                            <h1 className="net-bal">Total Balance</h1>
                             { total !== 0 && (
-                                <p className="display-6">{total.toFixed(2)}</p>
+                                <p className="display-6" style={total < 0 ? {color: 'red'} : total < 100 ? {color: "#e57842"}:{color: 'green'}}>{total.toFixed(2)}</p>
                             )}
                              { totalIncPrice !== 0 && (
                                 <p><i className="bi bi-arrow-up-circle"></i> Income: ${totalIncPrice.toFixed(2)}</p>
@@ -175,7 +160,7 @@ export const UserPage = () => {
                     series={[
                             {
                             data: catAndTot,
-                            innerRadius: 30,
+                            innerRadius:30,
                             outerRadius: 100,
                             paddingAngle: 0,
                             cornerRadius: 5,
@@ -188,17 +173,8 @@ export const UserPage = () => {
                         />
                 </section>  
                 </div>
-                
-
-                {/* pass through an object of income */}
                 <Expenses title={"Expenses"} expenses={expenses} categories={categories} updating={updating} setUpdating={setUpdating} id={id} success={success} setSuccess={setSuccess}/>  
-                </div>
-
-
-
-
-
-                
+                </div> 
             </>
              ) : (
             <section className="d-flex justify-content-center align-items-center">

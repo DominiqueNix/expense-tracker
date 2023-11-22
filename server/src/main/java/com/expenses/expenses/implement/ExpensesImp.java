@@ -8,19 +8,13 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class ExpensesImp implements ExpensesInt {
+
+    //finds all expenses for a particular user 
     @Override
     public ArrayList<Expenses> getAllExpenses(long userId) {
-        //select * from expenses where userid=userId
-        //create empty array list of expenses
-        //while rs.next, create new expense model
-        //add all items to model
-        //add model to arraylist
-
-        //return arratlist
-
         Connection con = DBConnection.connect();
         String query = "select * from expenses where userid="+userId;
-        ArrayList expenses = new ArrayList<>();
+        ArrayList<Expenses> expenses = new ArrayList<>();
 
         try{
             Statement stmt = con.createStatement();
@@ -45,12 +39,10 @@ public class ExpensesImp implements ExpensesInt {
         return expenses;
     }
 
+
+    //gets one expense for a user
     @Override
     public Expenses getOneExpense(long id) {
-        //select * from expenses where id=id
-        //create new expense model
-        //while rs.next add items to model
-        //return model
         Connection con = DBConnection.connect();
         String query = "select * from expenses where id="+id;
         Expenses exp = new Expenses();
@@ -76,9 +68,9 @@ public class ExpensesImp implements ExpensesInt {
         return exp;
     }
 
+    //adds an expense
     @Override
     public void addExpense(Expenses exp) {
-            //insert into expenses values(null, ?, ?, ?, ?)
         Connection con = DBConnection.connect();
 
         try{
@@ -100,6 +92,7 @@ public class ExpensesImp implements ExpensesInt {
         }
     }
 
+    //updates an expense
     @Override
     public void updateExpense(Expenses exp) {
         Connection con = DBConnection.connect();
@@ -123,6 +116,7 @@ public class ExpensesImp implements ExpensesInt {
         }
     }
 
+    //deletes an expense
     @Override
     public void deleteExpense(long id) {
             Connection con = DBConnection.connect();
