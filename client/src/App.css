@@ -51,11 +51,84 @@
   overflow: hidden;
 }
 
+.side-nav{
+  background-color: var(--navy) !important;
+  height: 100vh;
+  width: 17%;
+  position: fixed;
+  border-right: #deffd3 solid 1px;
+}
+
+.side-nav > h1 {
+  color: var(--lightgreen) !important;
+  margin-top: 5.5rem;
+}
+
+
+.side-nav > ul > li {
+  list-style: none;
+  font-size: 1.5rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+
+.side-nav > ul > li > button {
+  background-color: var(--navy);
+  color: var(--lightgreen);
+  border: none;
+  box-shadow: none;
+}
+
+.side-nav > ul > li > button:hover {
+  background-color: var(--navy);
+  color: #75d0ca;
+  border: none;
+  box-shadow: none;
+}
+
+.del-user:hover{
+  color: maroon !important;
+}
+
+.logo{
+  /* margin-left: 27%; */
+  /* margin-top: 5%; */
+  position: absolute;
+  height: 5rem;
+  left: 50%;
+  transform: translateX(-50%);
+
+}
+/* #cir-1{
+  position: absolute;
+  height: 30rem;
+  width: 30rem;
+  border-radius: 50%;
+  background-color: rgba(173, 224, 153, .54);
+  z-index: 1;
+} */
+
+.tag-line{
+  font-size: 2rem;
+  font-weight: 300;
+  line-height: 1.2;
+}
+
+.home-text{
+  margin-top: 5% !important;
+}
+
 .home-form{
   background-color: var(--navy) !important;
-  height: 35vh;
+  height: 45vh;
+  width: 25vw;
   border-radius: 15px !important;
-
+  margin-top: 5% !important;
+  font-size: 1.2rem !important;
+  padding: 2% !important;
+  z-index: 10 !important;
 }
 
 .submitBtn{
@@ -73,18 +146,18 @@
   overflow: hidden;
 }
 
-.navbar{
+/* .navbar{
   background-color: var(--blue) !important;
   box-shadow: inset 0 0 10px #000000;
-}
+} */
 
-.log-out{
+/* .log-out{
   background-color: var(--purple);
 }
 
 .log-out:hover{
   background-color: #7d7ec0;
-}
+} */
 
 .expenses{
   background-color: var(--lightgreen);
@@ -124,7 +197,22 @@
   height: 5%;
   margin-bottom: 1%;
   border-radius: 10px;
+  color: var(--navy);
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1.2;
 }
+
+.net-bal{
+  font-size: 2.1rem;
+  font-weight: 300;
+  line-height: 1.2;
+}
+
+.add-exp:hover{
+ background-color: #a6c99a;
+}
+
 .middle-wrapper{
   height: 95%;
   width: 50%;
@@ -133,7 +221,10 @@
 
 .main-content{
   height: 100%;
-  width: 100%;
+  width: 80%;
+  margin-right: 0% !important;
+  margin-top: 5% !important;
+  color: var(--navy) !important;
 }
 
 .each-exp{
@@ -146,4 +237,8 @@
 
 .each-exp:hover{
   background-color: #75d0ca;
+}
+
+#deleteModal{
+  z-index: 10 !important;
 }

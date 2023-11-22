@@ -39,7 +39,6 @@ public class UserImp implements UserInt {
     }
 
 
-
     @Override
     public void addUser(String username, String password) {
         Connection con = DBConnection.connect();
@@ -57,38 +56,41 @@ public class UserImp implements UserInt {
         }
 
     }
+
+    //method that checks if a user exists (used in sign up and login methods)
     public boolean doesUserExist(String username){
-        boolean bool = false;
+       ArrayList<Boolean> bool = new ArrayList<>();
         Connection con = DBConnection.connect();
         try{
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery("select username from users");
             while(rs.next()){
+                System.out.println(rs.getString("username"));
                 String existingUserName = rs.getString("username");
                 if(existingUserName.equals(username)){
-                    bool= true;
+                    bool.add(true);
                 } else{
-                    bool= false;
+                    bool.add(false);
                 }
             }
         }catch(SQLException e){
             System.out.println(e.getMessage());
         }
-        return bool;
+        if(bool.contains(true)){
+            return true;
+        } else {
+            return false;
+        }
     }
+
+    //check if user exsist, if not, create a new user, then get thier id.
     @Override
     public User signUp(String username, String password){
         User user = new User();
         Connection con =DBConnection.connect();
         try{
-//            Statement stmt = con.createStatement();
-//            ResultSet rs = stmt.executeQuery("select username from users");
-
-//            while (rs.next()){
-//                String existingUserName = rs.getString("username");
-//                if(existingUserName.equals(username)){
-//                    System.out.println("user already exists");
             boolean doesUserExist = doesUserExist(username);
+            System.out.println(doesUserExist);
                 if(doesUserExist){
                     System.out.println("user exists");
                 } else {
@@ -103,13 +105,10 @@ public class UserImp implements UserInt {
 
                     ResultSet rs2 = pstmtGetNewUser.executeQuery();
                     while(rs2.next()){
-//                        System.out.println(rs2.getInt("id"));
-//                        System.out.println(rs2.getString("username"));
                         user.setId(rs2.getInt("id"));
                         user.setUsername(rs2.getString("username"));
                         user.setLoggedIn(rs2.getInt("loggedIn"));
                     }
-//                        user.setLoggedIn(1);
                 }
             }
         }catch(Exception e){
@@ -118,51 +117,26 @@ public class UserImp implements UserInt {
         return user;
     }
 
+    //checks if user exists, if so, update thier loogedin property and get user info
     @Override
     public User login(String username, String password){
-                User user = new User();
-        ArrayList<Expenses> expenses= new ArrayList<>();
+        User user = new User();
         Connection con = DBConnection.connect();
-        //selecting all from user where the username from the database = username user input
-//        String query = "select username from users";
         try {
             Statement stmt = con.createStatement();
-//            ResultSet rs = stmt.executeQuery(query);
-//
-//            while (rs.next()) {
-//                String existingUserName = rs.getString("username");
-            System.out.println(username + " username");
             boolean doesUserExist = doesUserExist(username);
-            System.out.println(doesUserExist + " doesExist");
                 if (doesUserExist) {
                     PreparedStatement pstmtUserInfo = con.prepareStatement("select * from users where username=?");
                     pstmtUserInfo.setString(1, username);
                     ResultSet rs2 = pstmtUserInfo.executeQuery();
                     while(rs2.next()){
                         String usersPass = rs2.getString("password");
-                        System.out.println(usersPass.equals(password) + "password corrent (before)");
                         if(usersPass.equals(password)){
-                            System.out.println(usersPass.equals(password) + "password corrent (after)");
                             int res = stmt.executeUpdate("update users set loggedIn = 1 where id="+rs2.getInt("id"));
-                            System.out.println(res + "update command");
                             if(res != 0){
                                 user.setId(rs2.getInt("id"));
                                 user.setUsername(rs2.getString("username"));
                                 user.setLoggedIn(1);
-                                System.out.println(rs2.getInt("id") + " line 153");
-                                System.out.println(rs2.getString("username") + " line 154");
-//                                ResultSet rs4 = stmt.executeQuery("select * from expenses where userId =" + rs2.getInt("id"));
-//                                while(rs4.next()){
-//                                    Expenses expense = new Expenses();
-//                                    expense.setId(rs4.getLong("id"));
-//                                    expense.setType(rs4.getString("type"));
-//                                    expense.setName(rs4.getString("name"));
-//                                    expense.setPrice(rs4.getDouble("price"));
-//                                    expense.setCategoryId(rs4.getLong("categoryId"));
-//                                    expense.setUserId(rs4.getLong("userId"));
-//                                    expenses.add(expense);
-//                                }
-//                                user.setExpenses(expenses);
                             }
                         }
                     }
@@ -177,18 +151,17 @@ public class UserImp implements UserInt {
         return user;
     }
 
+//finds all the information (including expenses) for one user
     public User findOneUser(long id){
         Connection con = DBConnection.connect();
         User user = new User();
         ArrayList<Expenses> expenses= new ArrayList<>();
-        ArrayList<Categories> categories= new ArrayList<>();
         try{
             Statement stmt = con.createStatement();
 
             ResultSet rs = stmt.executeQuery("select id, username, loggedIn from users where id="+id);
             user.setId(rs.getInt("id"));
             user.setUsername(rs.getString("username"));
-//            user.setUsername(rs.getString("username"));
             user.setLoggedIn(rs.getInt("loggedIn"));
             ResultSet rs3 = stmt.executeQuery("select * from expenses where userId =" +id);
             while(rs3.next()){
@@ -209,17 +182,20 @@ public class UserImp implements UserInt {
         return user;
     }
 
+    //deletes a user based on id
     @Override
     public void deleteUser(long id){
         Connection con = DBConnection.connect();
         try{
             Statement stmt = con.createStatement();
             stmt.executeUpdate("delete from users where id="+id);
+            stmt.executeUpdate("delete from expenses where userId="+id);
         }catch(Exception e){
             System.out.println(e.getMessage());
         }
     }
 
+    //updateds users loggedIn property
     @Override
     public void logout(long id){
         Connection con = DBConnection.connect();
