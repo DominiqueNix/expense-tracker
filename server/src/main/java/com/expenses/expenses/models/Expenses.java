@@ -8,6 +8,7 @@ public class Expenses{
     private String date;
     private String category;
     private long userId;
+    
     public Expenses(){};
 
     public Expenses(long id, String type, String name, double price, String date, String category, long userId) {
