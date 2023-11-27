@@ -16,6 +16,7 @@ This repository contains the code for both the client and server side, but in or
 - [Getting Started](#getting-started)
 - [Website Screenshots](#screenshots)
 - [Development](#development)
+- [Technology Used](#technology-used)
 - [Acknolwedgements](#acknowledgements)
 
 ## Live Website
@@ -53,6 +54,9 @@ Follow these steps to get this project up and running on your computer in VSCode
 ## Development
   
 ![Screenshot 2023-11-22 4 35 28 PM](https://github.com/DominiqueNix/expense-tracker/assets/145811793/0b8e9019-4c2a-46a9-af7f-053f8b506834)
+
+## Technology Used
+[![My Skills](https://skillicons.dev/icons?i=js,java,html,css,sqlite,spring,react,materialui,maven,docker,bootstrap&perline=5)](https://skillicons.dev)
 
 ## Acknowledgements
 ![MUI](https://img.shields.io/badge/MUI-%230081CB.svg?style=for-the-badge&logo=mui&logoColor=white)
