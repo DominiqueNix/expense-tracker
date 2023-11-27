@@ -173,23 +173,23 @@ public class ExpensesImp implements ExpensesInt {
 
             for(int i = 0; i < allExpenses.size(); i++){
                 if(allExpenses.get(i).getType().equals("expense")){
-                  if(allExpenses.get(i).getDate().contains("-01-")){
+                  if(allExpenses.get(i).getDate().contains("-1-")){
                     nestedArray.get(0).set(0, nestedArray.get(0).get(0) + allExpenses.get(i).getPrice());
-                  } else if(allExpenses.get(i).getDate().contains("-02-")){
+                  } else if(allExpenses.get(i).getDate().contains("-2-")){
                     nestedArray.get(0).set(1, nestedArray.get(0).get(1) + allExpenses.get(i).getPrice());
-                  } else if(allExpenses.get(i).getDate().contains("-03-")){
+                  } else if(allExpenses.get(i).getDate().contains("-3-")){
                     nestedArray.get(0).set(2, nestedArray.get(0).get(2) + allExpenses.get(i).getPrice());
-                  } else if(allExpenses.get(i).getDate().contains("-04-")){
+                  } else if(allExpenses.get(i).getDate().contains("-4-")){
                     nestedArray.get(0).set(3, nestedArray.get(0).get(3) + allExpenses.get(i).getPrice());
-                  } else if(allExpenses.get(i).getDate().contains("-05-")){
+                  } else if(allExpenses.get(i).getDate().contains("-5-")){
                     nestedArray.get(0).set(4, nestedArray.get(0).get(4) + allExpenses.get(i).getPrice());
-                  } else if(allExpenses.get(i).getDate().contains("-06-")){
+                  } else if(allExpenses.get(i).getDate().contains("-6-")){
                     nestedArray.get(0).set(5, nestedArray.get(0).get(5) + allExpenses.get(i).getPrice());
-                  } else if(allExpenses.get(i).getDate().contains("-07-")){
+                  } else if(allExpenses.get(i).getDate().contains("-7-")){
                     nestedArray.get(0).set(6, nestedArray.get(0).get(6) + allExpenses.get(i).getPrice());
-                  } else if(allExpenses.get(i).getDate().contains("-08-")){
+                  } else if(allExpenses.get(i).getDate().contains("-8-")){
                     nestedArray.get(0).set(7, nestedArray.get(0).get(7) + allExpenses.get(i).getPrice());
-                  } else if(allExpenses.get(i).getDate().contains("-09-")){
+                  } else if(allExpenses.get(i).getDate().contains("-9-")){
                     nestedArray.get(0).set(8, nestedArray.get(0).get(8) + allExpenses.get(i).getPrice());
                   } else if(allExpenses.get(i).getDate().contains("-10-")){
                     nestedArray.get(0).set(9, nestedArray.get(0).get(9) + allExpenses.get(i).getPrice());
@@ -201,23 +201,23 @@ public class ExpensesImp implements ExpensesInt {
 
 
                 } else{
-                    if(allExpenses.get(i).getDate().contains("-01-")){
+                    if(allExpenses.get(i).getDate().contains("-1-")){
                     nestedArray.get(1).set(0, nestedArray.get(1).get(0) + allExpenses.get(i).getPrice());
-                  } else if(allExpenses.get(i).getDate().contains("-02-")){
+                  } else if(allExpenses.get(i).getDate().contains("-2-")){
                     nestedArray.get(1).set(1, nestedArray.get(1).get(1) + allExpenses.get(i).getPrice());
-                  } else if(allExpenses.get(i).getDate().contains("-03-")){
+                  } else if(allExpenses.get(i).getDate().contains("-3-")){
                     nestedArray.get(1).set(2, nestedArray.get(1).get(2) + allExpenses.get(i).getPrice());
-                  } else if(allExpenses.get(i).getDate().contains("-04-")){
+                  } else if(allExpenses.get(i).getDate().contains("-4-")){
                     nestedArray.get(1).set(3, nestedArray.get(1).get(3) + allExpenses.get(i).getPrice());
-                  } else if(allExpenses.get(i).getDate().contains("-05-")){
+                  } else if(allExpenses.get(i).getDate().contains("-5-")){
                     nestedArray.get(1).set(4, nestedArray.get(1).get(4) + allExpenses.get(i).getPrice());
-                  } else if(allExpenses.get(i).getDate().contains("-06-")){
+                  } else if(allExpenses.get(i).getDate().contains("-6-")){
                     nestedArray.get(1).set(5, nestedArray.get(1).get(5) + allExpenses.get(i).getPrice());
-                  } else if(allExpenses.get(i).getDate().contains("-07-")){
+                  } else if(allExpenses.get(i).getDate().contains("-7-")){
                     nestedArray.get(1).set(6, nestedArray.get(1).get(6) + allExpenses.get(i).getPrice());
-                  } else if(allExpenses.get(i).getDate().contains("-08-")){
+                  } else if(allExpenses.get(i).getDate().contains("-8-")){
                     nestedArray.get(1).set(7, nestedArray.get(1).get(7) + allExpenses.get(i).getPrice());
-                  } else if(allExpenses.get(i).getDate().contains("-09-")){
+                  } else if(allExpenses.get(i).getDate().contains("-9-")){
                     nestedArray.get(1).set(8, nestedArray.get(1).get(8) + allExpenses.get(i).getPrice());
                   } else if(allExpenses.get(i).getDate().contains("-10-")){
                     nestedArray.get(1).set(9, nestedArray.get(1).get(9) + allExpenses.get(i).getPrice());
