@@ -15,4 +15,6 @@ public interface ExpensesInt {
     public void updateExpense(Expenses exp);
     //delete expense void
     public void deleteExpense(long id);
+    //returns nested array list hold the totals of all income and expensens based on a single user
+    public ArrayList<ArrayList<Double>> getMonthTotals(long userId);
 }
