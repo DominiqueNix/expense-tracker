@@ -13,7 +13,7 @@ This repository contains the code for both the client and server side, but in or
 ## Table of Contents
 - [Live Website](#live-website)
 - [User Story](#user-story)
-- [Getting Started](#getting-started)
+- [Installation](#installation)
 - [Website Screenshots](#screenshots)
 - [Development](#development)
 - [Technology Used](#technology-used)
@@ -29,7 +29,7 @@ This repository contains the code for both the client and server side, but in or
       4. Add, update, and delete an income
       5. View stats about my financials 
       6. Logout when done
-## Getting Started
+## Installation
 Follow these steps to get this project up and running on your computer in VSCode:
   #### Server set-up:
     1. Nagivate to the server/src/main/java/com/expenses/expenses/ExpensesApplication.java file.
@@ -38,7 +38,14 @@ Follow these steps to get this project up and running on your computer in VSCode
   #### Client set-up:
     1. Right click on the client folder in the root of the project and click "open in integrated terminal"
     2. Make sure the termial window shows that you are in the expenses-tracker/client directory
-    3. Run npm start in the terminal
+    3. run the folling commands in the terminal:  
+  ``` javascript
+     # install necesarry dependencies
+     npm install
+
+     # run the program
+     npm start
+```
     4. A browser window should pop open and the app is now ready to use.
 ## Screenshots
 #### Login Page
