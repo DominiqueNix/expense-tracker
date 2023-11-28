@@ -1,4 +1,6 @@
-# expense-tracker
+ 
+ 
+# <img src="https://github.com/DominiqueNix/expense-tracker/assets/145811793/85d5820e-d962-4b1a-a745-dffce6d83f12" width="5%" height="5%"> Inex$pen$ive
 
 ## Description
 An expense tracker made using Java, SQLite, and React that allows users to sign in and track their expenses.
