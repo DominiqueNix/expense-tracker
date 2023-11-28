@@ -40,10 +40,10 @@ Follow these steps to get this project up and running on your computer in VSCode
     2. Make sure the termial window shows that you are in the expenses-tracker/client directory
     3. run the folling commands in the terminal:  
   ``` javascript
-     # install necesarry dependencies
+     // install necesarry dependencies
      npm install
 
-     # run the program
+     // run the program
      npm start
 ```
     4. A browser window should pop open and the app is now ready to use.
