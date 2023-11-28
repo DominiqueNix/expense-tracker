@@ -58,7 +58,8 @@ Follow these steps to get this project up and running on your computer in VSCode
 
 
 #### Yearly Breakdown
-![Screenshot 2023-11-27 5 03 18 PM](https://github.com/DominiqueNix/expense-tracker/assets/145811793/969feef1-c608-4bb9-b441-35fec8b60d2d)
+![Screenshot 2023-11-28 1 55 18 PM](https://github.com/DominiqueNix/expense-tracker/assets/145811793/ce4dafbf-c2e5-4658-81fe-163938a22cb9)
+
 
 ## Development
   
