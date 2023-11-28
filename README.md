@@ -51,11 +51,10 @@ Follow these steps to get this project up and running on your computer in VSCode
     4. A browser window should pop open and the app is now ready to use.
 ## Screenshots
 #### Login Page
-![Screenshot 2023-11-22 4 36 52 PM](https://github.com/DominiqueNix/expense-tracker/assets/145811793/52599ba9-345f-464a-8d7c-48df435933cb)
+![Screenshot 2023-11-28 4 46 43 PM](https://github.com/DominiqueNix/expense-tracker/assets/145811793/4649899d-ff81-4a0a-9613-019899c13a28)
 
 #### Home page
 ![Screenshot 2023-11-22 4 41 18 PM](https://github.com/DominiqueNix/expense-tracker/assets/145811793/6a07ffd4-b877-4cf5-856c-1a4d1fbf1750)
-
 
 #### Yearly Breakdown
 ![Screenshot 2023-11-28 1 55 18 PM](https://github.com/DominiqueNix/expense-tracker/assets/145811793/ce4dafbf-c2e5-4658-81fe-163938a22cb9)
