@@ -148,7 +148,7 @@ public class ExpensesImp implements ExpensesInt {
         nestedArray.add(new ArrayList<>());
         nestedArray.add(new ArrayList<>());
         for(int i = 0; i < 2; i++) {
-            for(int j = 0; j < 12; j++){
+            for(int j = 0; j < 13; j++){
                 nestedArray.get(i).add(0.00);
             }
         }
@@ -172,7 +172,9 @@ public class ExpensesImp implements ExpensesInt {
 
 
             for(int i = 0; i < allExpenses.size(); i++){
-                if(allExpenses.get(i).getType().equals("expense")){
+              if(allExpenses.get(i).getType() == null){
+               System.out.println("no type");
+              }else if(allExpenses.get(i).getType().equals("expense")){
                   if(allExpenses.get(i).getDate().contains("-1-")){
                     nestedArray.get(0).set(0, nestedArray.get(0).get(0) + allExpenses.get(i).getPrice());
                   } else if(allExpenses.get(i).getDate().contains("-2-")){
@@ -197,9 +199,9 @@ public class ExpensesImp implements ExpensesInt {
                     nestedArray.get(0).set(10, nestedArray.get(0).get(10) + allExpenses.get(i).getPrice());
                   } else if(allExpenses.get(i).getDate().contains("-12-")){
                     nestedArray.get(0).set(11, nestedArray.get(0).get(11) + allExpenses.get(i).getPrice());
+                  } else{
+                    nestedArray.get(0).set(12, nestedArray.get(0).get(12) + allExpenses.get(i).getPrice());
                   }
-
-
                 } else{
                     if(allExpenses.get(i).getDate().contains("-1-")){
                     nestedArray.get(1).set(0, nestedArray.get(1).get(0) + allExpenses.get(i).getPrice());
@@ -225,6 +227,8 @@ public class ExpensesImp implements ExpensesInt {
                     nestedArray.get(1).set(10, nestedArray.get(1).get(10) + allExpenses.get(i).getPrice());
                   } else if(allExpenses.get(i).getDate().contains("-12-")){
                     nestedArray.get(1).set(11, nestedArray.get(1).get(11) + allExpenses.get(i).getPrice());
+                  } else{
+                    nestedArray.get(1).set(12, nestedArray.get(1).get(12) + allExpenses.get(i).getPrice());
                   }
                 }
             }
@@ -233,7 +237,6 @@ public class ExpensesImp implements ExpensesInt {
         }catch(SQLException e){
             System.out.println(e.getMessage());
         }
-        System.out.println(nestedArray);
         return nestedArray;
     }
 
