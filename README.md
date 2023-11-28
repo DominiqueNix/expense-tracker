@@ -1,6 +1,6 @@
  
  
-# <img src="https://github.com/DominiqueNix/expense-tracker/assets/145811793/85d5820e-d962-4b1a-a745-dffce6d83f12" width="5%" height="5%"> Inex$pen$ive
+# <img src="https://github.com/DominiqueNix/expense-tracker/assets/145811793/85d5820e-d962-4b1a-a745-dffce6d83f12" width="5%" height="5%"> Inexpen$ive
 
 ## Description
 An expense tracker made using Java, SQLite, and React that allows users to sign in and track their expenses.
@@ -22,7 +22,7 @@ This repository contains the code for both the client and server side, but in or
 - [Acknolwedgements](#acknowledgements)
 
 ## Live Website
-  [Inexspensive](https://inexspensive24.onrender.com/)
+  [Inexpensive Website](https://inexspensive24.onrender.com/)
 ## User Story
 #### As a User, I want to 
       1. Create an account or login 
