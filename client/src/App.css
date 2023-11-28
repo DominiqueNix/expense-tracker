@@ -54,22 +54,12 @@
 }
 
 .logo{
-  /* margin-left: 27%; */
-  /* margin-top: 5%; */
   position: absolute;
   height: 5rem;
   left: 50%;
   transform: translateX(-50%);
 
 }
-/* #cir-1{
-  position: absolute;
-  height: 30rem;
-  width: 30rem;
-  border-radius: 50%;
-  background-color: rgba(173, 224, 153, .54);
-  z-index: 1;
-} */
 
 .tag-line{
   font-size: 2rem;
@@ -149,37 +139,12 @@
   margin-top: 20%;
 }
 
-/* .mostMade {
-  background-color: var(--lightgreen);
-  height: 85%;
-  width: 30%;
-}
-
-.mostSaved {
-  background-color: var(--lightgreen);
-  height: 100%;
-  width: 30%;
-} */
-
-/* .navbar{
-  background-color: var(--blue) !important;
-  box-shadow: inset 0 0 10px #000000;
-} */
-
-/* .log-out{
-  background-color: var(--purple);
-}
-
-.log-out:hover{
-  background-color: #7d7ec0;
-} */
-
 .expenses{
   background-color: var(--lightgreen);
   height: 85%;
   width: 22%;
   border-radius: 20px;
-  /* margin: 2rem; */
+  overflow: scroll;
 }
 
 .total-wrapper{
@@ -188,7 +153,6 @@
   width: 95%;
   margin-bottom: 1%;
   border-radius: 20px;
-  /* margin: 2rem; */
 }
 
 .total{
@@ -203,8 +167,6 @@
   height: 40%;
   width: 95%;
   border-radius: 20px;
-  /* margin: 2rem; */
-
 }
 .add-exp{
   background-color: var(--lightgreen);
